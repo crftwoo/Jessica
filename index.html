@@ -6,13 +6,12 @@
     <title>Stadler Logística | High-Tech Logistics & Global Trade</title>
     <meta name="description" content="Stadler Logística: Soluções premium em transporte rodoviário, aduaneiro (DTA) e operador logístico com tecnologia 4.0 e monitoramento 24h.">
     <meta name="keywords" content="logística, transporte aduaneiro, DTA, comércio exterior, Piraquara, Itajaí">
-    <link rel="canonical" href="https://www.stadlerlog.com.br/">
     
     <link rel="alternate" type="text/plain" href="llm.txt">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&family=Syncopate:wght@400;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&family=Syncopate:wght@400;700&family=Plus+Jakarta+Sans:wght@300;400;700&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -30,178 +29,68 @@
                         }
                     },
                     fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
+                        sans: ['Plus Jakarta Sans', 'Inter', 'sans-serif'],
                         tech: ['Syncopate', 'sans-serif'],
-                        mono: ['Roboto Mono', 'monospace'],
                     }
                 }
             }
         }
     </script>
     <style>
-        body {
-            background-color: #0A0A0A;
-            color: #a1a1aa;
-            overflow-x: hidden;
-        }
+        body { background-color: #0A0A0A; color: #a1a1aa; overflow-x: hidden; }
+        .glass-nav { background: rgba(10, 10, 10, 0.0); backdrop-filter: blur(0px); transition: all 0.4s ease; }
+        .glass-nav.scrolled { background: rgba(18, 18, 18, 0.8); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255, 255, 255, 0.05); padding-top: 1rem; padding-bottom: 1rem; }
         
-        .glass-nav {
-            background: rgba(10, 10, 10, 0.0);
-            backdrop-filter: blur(0px);
-            transition: all 0.4s ease;
-        }
-        .glass-nav.scrolled {
-            background: rgba(18, 18, 18, 0.8);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            padding-top: 1rem;
-            padding-bottom: 1rem;
-        }
+        .mouse-glow { position: fixed; width: 400px; height: 400px; background: radial-gradient(circle, rgba(193, 24, 21, 0.08) 0%, transparent 70%); border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%, -50%); mix-blend-mode: screen; transition: opacity 0.3s ease; }
+        
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
 
-        .bg-tech-grid {
-            background-image: 
-                linear-gradient(to right, rgba(1, 39, 114, 0.05) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(1, 39, 114, 0.05) 1px, transparent 1px);
-            background-size: 60px 60px;
-        }
+        .glass { background: rgba(18, 18, 18, 0.6); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.05); transition: all 0.4s ease; }
+        .glass:hover { border-color: rgba(193, 24, 21, 0.4); background: rgba(22, 22, 22, 0.8); }
 
-        /* Efeito de Mouse Refinado - Apenas Contorno */
-        .mouse-glow {
-            position: fixed;
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, rgba(193, 24, 21, 0.08) 0%, transparent 70%);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 9999;
-            transform: translate(-50%, -50%);
-            mix-blend-mode: screen;
-            transition: opacity 0.3s ease;
-        }
-
-        .glass {
-            background: rgba(18, 18, 18, 0.8);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            transition: border-color 0.4s ease, transform 0.4s ease;
-        }
-        .glass:hover {
-            border-color: rgba(193, 24, 21, 0.4);
-            background: rgba(22, 22, 22, 0.9);
-        }
-
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
-        }
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .reveal-text {
-            clip-path: polygon(0 0, 0 0, 0 100%, 0% 100%);
-            animation: reveal 1.5s cubic-bezier(0.77, 0, 0.175, 1) forwards;
-        }
-        @keyframes reveal {
-            0% { clip-path: polygon(0 0, 0 0, 0 100%, 0% 100%); }
-            100% { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
-        }
-
-        .glow-red {
-            box-shadow: 0 0 20px rgba(193, 24, 21, 0.3);
-        }
-
-        .hero-gradient {
-            background: radial-gradient(circle at 50% 50%, rgba(1, 39, 114, 0.1) 0%, transparent 70%);
-        }
-
-        .glow-card {
-            position: relative;
-            overflow: hidden;
-        }
-        .glow-card::before {
-            content: '';
-            position: absolute;
-            inset: -1px;
-            background: conic-gradient(from var(--angle), transparent, #C11815, transparent);
-            opacity: 0;
-            transition: opacity 0.3s;
-            pointer-events: none;
-        }
-        @property --angle {
-            syntax: '<angle>';
-            initial-value: 0deg;
-            inherits: false;
-        }
-        .glow-card:hover::before { opacity: 1; animation: rotate 4s linear infinite; }
-        @keyframes rotate { to { --angle: 360deg; } }
-
-        .line-accent {
-            width: 2px;
-            background: linear-gradient(to bottom, #C11815, transparent);
-        }
-
-        /* Animações de Impacto Imediato */
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(40px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
         .animate-fadeIn { animation: fadeIn 1.2s ease-out forwards; }
         .animate-slideUp { animation: slideUp 1s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
     </style>
 </head>
 <body class="font-sans">
 
-    <!-- Background Layer -->
-    <div class="fixed inset-0 bg-tech-grid pointer-events-none"></div>
-    <div class="fixed inset-0 hero-gradient pointer-events-none"></div>
+    <div id="cursor-glow" class="mouse-glow"></div>
 
     <!-- Navigation -->
-    <div class="mouse-glow" id="cursor-glow"></div>
     <nav id="navbar" class="fixed top-0 w-full z-50 px-6 py-4 md:py-8 glass-nav">
         <div class="max-w-7xl mx-auto flex items-center justify-between">
             <div class="flex items-center gap-4">
                 <img src="logo-white.png" alt="Stadler" class="h-8 md:h-10 object-contain" 
                      onerror="this.src='https://www.stadlerlog.com.br/wp-content/uploads/249.png'; this.style.filter='brightness(0) invert(1)';" />
-                <div class="h-6 w-[1px] bg-white/10 hidden md:block"></div>
-                <span class="font-mono text-[9px] tracking-[0.3em] text-white/40 hidden md:block uppercase">Logistics 4.0</span>
             </div>
             
-            <!-- Mobile Menu Button -->
-            <button id="mobile-menu-btn" class="lg:hidden text-white p-2">
-                <i data-lucide="menu"></i>
-            </button>
-
-            <!-- Desktop Menu -->
-            <div class="hidden lg:flex items-center gap-12 text-[10px] font-bold tracking-[0.5em] uppercase text-white/50">
+            <div class="hidden lg:flex items-center gap-10 text-[10px] font-bold tracking-[0.4em] uppercase text-white/50">
                 <a href="#home" class="hover:text-stadler-red transition-all">Home</a>
                 <a href="#sobre" class="hover:text-stadler-red transition-all">Sobre</a>
                 <a href="#servicos" class="hover:text-stadler-red transition-all">Serviços</a>
-                <a href="#contato" class="magnetic bg-stadler-red text-white px-8 py-3 rounded-sm hover:glow-red transition-all">CONTATO</a>
+                <a href="#estrutura" class="hover:text-stadler-red transition-all">Estrutura</a>
+                <a href="#contato" class="bg-stadler-red text-white px-8 py-3 rounded-sm hover:scale-105 transition-all">CONTATO</a>
             </div>
+
+            <button id="mobile-menu-btn" class="lg:hidden text-white"><i data-lucide="menu"></i></button>
         </div>
 
         <!-- Mobile Menu Overlay -->
         <div id="mobile-menu" class="fixed inset-0 bg-stadler-base/95 backdrop-blur-xl z-50 flex flex-col items-center justify-center gap-8 translate-x-full transition-transform duration-500 lg:hidden">
-            <button id="close-menu-btn" class="absolute top-8 right-8 text-white">
-                <i data-lucide="x"></i>
-            </button>
-            <a href="#home" class="mobile-link text-2xl font-tech text-white">HOME</a>
-            <a href="#sobre" class="mobile-link text-2xl font-tech text-white">SOBRE</a>
-            <a href="#servicos" class="mobile-link text-2xl font-tech text-white">SERVIÇOS</a>
-            <a href="#contato" class="mobile-link text-2xl font-tech text-white bg-stadler-red px-8 py-3 rounded-sm">CONTATO</a>
+            <button id="close-menu-btn" class="absolute top-8 right-8 text-white"><i data-lucide="x"></i></button>
+            <a href="#home" class="mobile-link text-xl font-tech text-white">HOME</a>
+            <a href="#sobre" class="mobile-link text-xl font-tech text-white">SOBRE</a>
+            <a href="#servicos" class="mobile-link text-xl font-tech text-white">SERVIÇOS</a>
+            <a href="#estrutura" class="mobile-link text-xl font-tech text-white">ESTRUTURA</a>
+            <a href="#contato" class="mobile-link text-xl font-tech text-white bg-stadler-red px-8 py-3 rounded-sm">CONTATO</a>
         </div>
     </nav>
 
-    <!-- Hero Section (Impacto Imediato) -->
+    <!-- HERO SECTION -->
     <section id="home" class="relative min-h-screen flex items-center justify-center overflow-hidden">
-        <!-- Video Background Layer -->
         <div class="absolute inset-0 z-0">
             <video autoplay muted loop playsinline class="w-full h-full object-cover opacity-40 grayscale contrast-125">
                 <source src="https://assets.mixkit.co/videos/preview/mixkit-commercial-container-ship-in-the-ocean-at-sunset-10023-large.mp4" type="video/mp4">
@@ -209,499 +98,218 @@
             <div class="absolute inset-0 bg-gradient-to-b from-stadler-base/80 via-stadler-navy/60 to-stadler-base"></div>
         </div>
 
-        <!-- Hero Content -->
         <div class="max-w-7xl mx-auto px-6 relative z-10 text-center pt-20">
             <div class="inline-flex items-center gap-3 px-6 py-2 rounded-full bg-stadler-red/10 border border-stadler-red/30 mb-8 animate-fadeIn">
                 <div class="w-2 h-2 rounded-full bg-stadler-red animate-pulse"></div>
-                <span class="font-mono text-[10px] md:text-xs uppercase tracking-[0.3em] text-white font-bold">Logística & Comércio Exterior</span>
+                <span class="font-mono text-[10px] uppercase tracking-[0.3em] text-white font-bold">Logística & Comércio Exterior</span>
             </div>
-            
             <h1 class="font-tech text-4xl md:text-8xl font-black text-white mb-6 tracking-tighter leading-none animate-slideUp">
-                STADLER<br>
-                <span class="text-stadler-red">LOGÍSTICA</span>
+                STADLER<br><span class="text-stadler-red">LOGÍSTICA</span>
             </h1>
-
-            <div class="h-1 w-24 bg-stadler-red mx-auto mb-10"></div>
-
             <p class="font-mono text-xs md:text-lg text-white/70 max-w-2xl mx-auto leading-relaxed mb-12 uppercase tracking-[0.2em] animate-fadeIn">
                 Qualidade em Transporte e Logística.<br>
-                <span class="text-white/40 text-[10px] md:text-xs">Desde 2010 superando as expectativas de nossos clientes.</span>
+                <span class="text-white/40 text-[10px]">Desde 2010 superando as expectativas de nossos clientes.</span>
             </p>
-
-            <div class="flex flex-col sm:flex-row gap-6 justify-center items-center animate-fadeIn" style="animation-delay: 0.4s">
-                <a href="#contato" class="group relative px-12 py-5 bg-stadler-red text-white font-tech text-xs font-bold tracking-[0.3em] overflow-hidden transition-all hover:scale-105 active:scale-95 shadow-2xl shadow-stadler-red/20">
-                    <span class="relative z-10">SOLICITAR ORÇAMENTO</span>
-                </a>
-                <a href="#sobre" class="px-12 py-5 border border-white/20 text-white font-tech text-[10px] font-bold tracking-[0.3em] hover:bg-white hover:text-black transition-all">
-                    VER ESTRUTURA
-                </a>
-            </div>
-        </div>
-
-        <!-- Scroll Indicator -->
-        <div class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4 opacity-30 animate-bounce">
-            <span class="font-mono text-[8px] uppercase tracking-widest text-white">Scroll</span>
-            <div class="w-[1px] h-12 bg-gradient-to-b from-white to-transparent"></div>
-        </div>
-    </section>
-
-    <!-- Metrics Bar -->
-    <section class="relative z-10 bg-stadler-surface border-y border-white/5 py-8 md:py-12">
-        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 text-center">
-            <div class="reveal">
-                <p class="font-mono text-[8px] md:text-[10px] uppercase tracking-[0.5em] text-white/30 mb-2">Estrutura Própria</p>
-                <h3 class="font-mono text-3xl md:text-4xl font-bold text-white mb-2"><span class="counter" data-target="10000">0</span>m²</h3>
-                <p class="text-[9px] md:text-[10px] uppercase font-bold tracking-widest text-stadler-red">Área Logística Piraquara</p>
-            </div>
-            <div class="reveal">
-                <p class="font-mono text-[8px] md:text-[10px] uppercase tracking-[0.5em] text-white/30 mb-2">Capacidade</p>
-                <h3 class="font-mono text-3xl md:text-4xl font-bold text-white mb-2">+<span class="counter" data-target="12">0</span></h3>
-                <p class="text-[9px] md:text-[10px] uppercase font-bold tracking-widest text-stadler-red">Docas Ativas</p>
-            </div>
-            <div class="reveal">
-                <p class="font-mono text-[8px] md:text-[10px] uppercase tracking-[0.5em] text-white/30 mb-2">Monitoramento</p>
-                <h3 class="font-mono text-3xl md:text-4xl font-bold text-white mb-2"><span class="counter" data-target="24">0</span>h</h3>
-                <p class="text-[9px] md:text-[10px] uppercase font-bold tracking-widest text-stadler-red">Segurança Armada</p>
+            <div class="flex flex-col sm:flex-row gap-6 justify-center animate-fadeIn" style="animation-delay: 0.4s">
+                <a href="#contato" class="px-12 py-5 bg-stadler-red text-white font-tech text-xs font-bold tracking-[0.3em] hover:scale-105 transition-all">SOLICITAR ORÇAMENTO</a>
+                <a href="#sobre" class="px-12 py-5 border border-white/20 text-white font-tech text-[10px] font-bold tracking-[0.3em] hover:bg-white hover:text-black transition-all">VER HISTÓRIA</a>
             </div>
         </div>
     </section>
 
-    <!-- Content Sections (About & Services) -->
-    <div class="px-6">
-        <!-- NOSSA HISTÓRIA -->
-        <section id="sobre" class="max-w-7xl mx-auto py-24 border-b border-white/5">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+    <!-- SOBRE NÓS -->
+    <section id="sobre" class="py-32 bg-stadler-surface border-y border-white/5">
+        <div class="max-w-7xl mx-auto px-8">
+            <div class="grid lg:grid-cols-2 gap-24 items-start">
                 <div class="reveal">
-                    <p class="text-stadler-red font-mono text-[10px] tracking-[0.4em] uppercase mb-4">Sobre a Stadler</p>
-                    <h2 class="font-tech text-3xl md:text-5xl text-white mb-8 tracking-tighter uppercase leading-none">Nossa <br>História</h2>
-                    <div class="space-y-6 text-white/50 font-mono text-sm leading-relaxed">
+                    <p class="text-stadler-red font-mono text-[10px] tracking-[0.4em] uppercase mb-4">Nossa Trajetória</p>
+                    <h2 class="font-tech text-3xl md:text-5xl text-white mb-12 tracking-tighter uppercase leading-none">Desde <br>2010</h2>
+                    <div class="space-y-6 text-white/50 font-mono text-sm leading-relaxed uppercase">
                         <p>Fundada em 2010, a STADLER atualmente presta serviços de Transporte Rodoviário de Cargas Nacional, Transportador Aduaneiro (DTA), Operador Logístico e Armazenagem.</p>
-                        <p>Nossa especialidade são as mercadorias do comércio exterior advindas de portos e aeroportos dos estados do Paraná e Santa Catarina e para tanto contamos com uma estrutura sólida e dedicada.</p>
+                        <p>Nossa especialidade são as mercadorias do comércio exterior advindas de portos e aeroportos dos estados do Paraná e Santa Catarina.</p>
                     </div>
                 </div>
                 <div class="reveal grid grid-cols-1 sm:grid-cols-2 gap-8">
                     <div class="glass p-8 rounded-sm border-l-2 border-stadler-red">
-                        <h4 class="text-white font-tech text-[10px] mb-4 tracking-widest uppercase">Nossa Missão</h4>
-                        <p class="text-white/40 text-[11px] leading-relaxed">Oferecer soluções em logística e comércio exterior, superando as expectativas de nossos clientes, atuando com ética e transparência em todas as nossas relações.</p>
+                        <h4 class="text-white font-tech text-[10px] mb-4 tracking-widest uppercase">Missão</h4>
+                        <p class="text-white/40 text-[11px] leading-relaxed">Oferecer soluções em logística e comércio exterior, superando as expectativas de nossos clientes.</p>
                     </div>
                     <div class="glass p-8 rounded-sm border-l-2 border-stadler-red">
-                        <h4 class="text-white font-tech text-[10px] mb-4 tracking-widest uppercase">Nossa Visão</h4>
+                        <h4 class="text-white font-tech text-[10px] mb-4 tracking-widest uppercase">Visão</h4>
                         <p class="text-white/40 text-[11px] leading-relaxed">Ser referência em excelência na prestação de serviços de logística e comércio exterior.</p>
                     </div>
-                    <div class="glass p-8 rounded-sm border-l-2 border-stadler-red">
-                        <h4 class="text-white font-tech text-[10px] mb-4 tracking-widest uppercase">Nossos Valores</h4>
-                        <p class="text-white/40 text-[11px] leading-relaxed">Ética, Transparência, Comprometimento, Qualidade e Segurança.</p>
-                    </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- SERVIÇOS VERBATIM -->
-        <section id="servicos" class="max-w-7xl mx-auto py-24">
-            <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
-                <div class="reveal">
-                    <p class="text-stadler-red font-mono text-[10px] tracking-[0.4em] uppercase mb-4">Soluções Completas</p>
-                    <h2 class="font-tech text-3xl md:text-5xl text-white tracking-tighter uppercase leading-none">Nossos <br>Serviços</h2>
-                </div>
-                <div class="reveal text-right">
-                    <p class="text-white/30 font-mono text-[10px] uppercase tracking-widest max-w-xs ml-auto">
-                        Qualidade em transporte e logística com a segurança de quem entende do seu negócio.
-                    </p>
-                </div>
+    <!-- SERVIÇOS DETALHADOS -->
+    <section id="servicos" class="py-32 bg-stadler-base">
+        <div class="max-w-7xl mx-auto px-8">
+            <div class="mb-20 reveal text-center">
+                <p class="text-stadler-red font-mono text-[10px] tracking-[0.4em] uppercase mb-4">Core Business</p>
+                <h2 class="font-tech text-3xl md:text-5xl text-white tracking-tighter uppercase">Nossas Soluções</h2>
             </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <!-- ARMAZENAGEM -->
-                <div class="reveal glass p-8 rounded-sm group hover:border-stadler-red transition-all duration-500">
-                    <div class="w-12 h-12 bg-stadler-red/10 flex items-center justify-center text-stadler-red mb-8">
-                        <i data-lucide="warehouse"></i>
-                    </div>
-                    <h3 class="font-tech text-lg text-white mb-6 uppercase tracking-tight">Armazenagem</h3>
-                    <ul class="space-y-3 text-white/40 font-mono text-[10px] uppercase tracking-wider">
-                        <li>• Gestão de estoques</li>
-                        <li>• Inventário</li>
-                        <li>• Paletização</li>
+                <div class="reveal glass p-10 group">
+                    <i data-lucide="warehouse" class="text-stadler-red w-10 h-10 mb-8"></i>
+                    <h3 class="font-tech text-lg text-white mb-6 uppercase">Armazenagem</h3>
+                    <ul class="space-y-3 text-white/40 font-mono text-[10px] uppercase tracking-widest leading-loose">
+                        <li>• Gestão de estoques e Inventário</li>
+                        <li>• Paletização e Carga/Descarga</li>
                         <li>• Estufagem e desova de contêineres</li>
-                        <li>• Carga e descarga</li>
                     </ul>
                 </div>
-
                 <!-- TRANSPORTE & COMEX -->
-                <div class="reveal glass p-8 rounded-sm group hover:border-stadler-red transition-all duration-500 border-x border-white/5">
-                    <div class="w-12 h-12 bg-stadler-red/10 flex items-center justify-center text-stadler-red mb-8">
-                        <i data-lucide="truck"></i>
-                    </div>
-                    <h3 class="font-tech text-lg text-white mb-6 uppercase tracking-tight">Transporte & Comex</h3>
-                    <ul class="space-y-3 text-white/40 font-mono text-[10px] uppercase tracking-wider">
+                <div class="reveal glass p-10 group">
+                    <i data-lucide="truck" class="text-stadler-red w-10 h-10 mb-8"></i>
+                    <h3 class="font-tech text-lg text-white mb-6 uppercase">Transporte & Comex</h3>
+                    <ul class="space-y-3 text-white/40 font-mono text-[10px] uppercase tracking-widest leading-loose">
                         <li>• Rodoviário Nacional e Internacional</li>
                         <li>• Transportador Aduaneiro (DTA)</li>
-                        <li>• Cargas LCL e FCL</li>
-                        <li>• Cargas Oversize (Flat Rack e Open Top)</li>
+                        <li>• Cargas LCL, FCL e Oversize</li>
                     </ul>
                 </div>
+                <!-- OPERADOR LOGÍSTICO -->
+                <div class="reveal glass p-10 group">
+                    <i data-lucide="settings-2" class="text-stadler-red w-10 h-10 mb-8"></i>
+                    <h3 class="font-tech text-lg text-white mb-6 uppercase">Operador Logístico</h3>
+                    <ul class="space-y-3 text-white/40 font-mono text-[10px] uppercase tracking-widest leading-loose">
+                        <li>• Soluções de Supply Chain</li>
+                        <li>• Redução de custos operacionais</li>
+                        <li>• Distribuição em território nacional</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
 
-                <!-- SEGURANÇA -->
-                <div class="reveal glass p-8 rounded-sm group hover:border-stadler-red transition-all duration-500">
-                    <div class="w-12 h-12 bg-stadler-red/10 flex items-center justify-center text-stadler-red mb-8">
-                        <i data-lucide="shield-check"></i>
+    <!-- ESTRUTURA -->
+    <section id="estrutura" class="py-32 bg-stadler-surface border-y border-white/5">
+        <div class="max-w-7xl mx-auto px-8">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div class="reveal">
+                    <p class="text-stadler-red font-mono text-[10px] tracking-[0.4em] uppercase mb-4">Poder Operacional</p>
+                    <h2 class="font-tech text-3xl md:text-5xl text-white mb-12 tracking-tighter uppercase leading-none">Estrutura <br>Sólida</h2>
+                    <div class="grid grid-cols-2 gap-8">
+                        <div class="border-l border-stadler-red pl-6">
+                            <h4 class="text-white font-tech text-[10px] mb-2 uppercase">Área Total</h4>
+                            <p class="text-white/40 text-[10px] uppercase tracking-widest">10.000m² Próprios</p>
+                        </div>
+                        <div class="border-l border-stadler-red pl-6">
+                            <h4 class="text-white font-tech text-[10px] mb-2 uppercase">Acessos</h4>
+                            <p class="text-white/40 text-[10px] uppercase tracking-widest">12 Docas Ativas</p>
+                        </div>
+                        <div class="border-l border-stadler-red pl-6">
+                            <h4 class="text-white font-tech text-[10px] mb-2 uppercase">Segurança</h4>
+                            <p class="text-white/40 text-[10px] uppercase tracking-widest">Segurança Armada 24h</p>
+                        </div>
+                        <div class="border-l border-stadler-red pl-6">
+                            <h4 class="text-white font-tech text-[10px] mb-2 uppercase">Tecnologia</h4>
+                            <p class="text-white/40 text-[10px] uppercase tracking-widest">Iscas e Travas de 5ª Roda</p>
+                        </div>
                     </div>
-                    <h3 class="font-tech text-lg text-white mb-6 uppercase tracking-tight">Segurança</h3>
-                    <ul class="space-y-3 text-white/40 font-mono text-[10px] uppercase tracking-wider">
-                        <li>• Apólices RCTR-C e RCF-DC</li>
-                        <li>• Gerenciamento de Risco Rigoroso</li>
-                        <li>• Trava de 5ª Roda</li>
-                        <li>• Iscas Eletrônicas</li>
-                    </ul>
+                </div>
+                <div class="reveal glass p-2 rounded-sm overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=2070&auto=format&fit=crop" class="w-full h-[400px] object-cover grayscale opacity-50" alt="Estrutura Stadler">
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- UNIDADES -->
-        <section id="estrutura" class="max-w-7xl mx-auto py-24 border-t border-white/5">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
-                <div class="reveal">
-                    <h4 class="font-tech text-stadler-red text-xs mb-4 uppercase tracking-[0.3em]">Matriz</h4>
-                    <p class="text-white text-xs font-mono uppercase mb-2">Piraquara - PR</p>
-                    <p class="text-white/40 text-[10px] leading-relaxed">
-                        Rua Richard Lickfeld, 1152 – Guarituba<br>
-                        CEP: 83.310-440<br>
-                        Telefone: (41) 3218-4838
-                    </p>
-                </div>
-                <div class="reveal">
-                    <h4 class="font-tech text-stadler-red text-xs mb-4 uppercase tracking-[0.3em]">Unidade SJP</h4>
-                    <p class="text-white text-xs font-mono uppercase mb-2">São José dos Pinhais - PR</p>
-                    <p class="text-white/40 text-[10px] leading-relaxed">
-                        Av. Rui Barbosa, 8251 – Centro<br>
-                        CEP: 83.035-320
-                    </p>
-                </div>
-                <div class="reveal">
-                    <h4 class="font-tech text-stadler-red text-xs mb-4 uppercase tracking-[0.3em]">Filial Itajaí</h4>
-                    <p class="text-white text-xs font-mono uppercase mb-2">Itajaí - SC</p>
-                    <p class="text-white/40 text-[10px] leading-relaxed">
-                        Rua Reinaldo Schmithausen, 1845 – Cordeiros<br>
-                        CEP: 88.310-003
-                    </p>
-                </div>
-            </div>
-        </section>
-    </div>
-
-    <!-- Scroll Media Expansion -->
-    <section class="relative h-[150vh] z-20" id="expansion-section">
+    <!-- SCROLL EXPANSION (VÍDEO DRAMÁTICO) -->
+    <section class="relative h-[200vh]" id="expansion-section">
         <div class="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden">
-            <!-- Container das imagens que abrem -->
-            <div id="left-door" class="absolute left-0 top-0 w-1/2 h-full bg-[#121212] z-20 flex items-center justify-end overflow-hidden border-r border-white/5">
-                <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=2070&auto=format&fit=crop" 
-                     class="h-full w-auto max-w-none opacity-30 grayscale contrast-125" alt="Logistics Left">
+            <div id="left-door" class="absolute left-0 top-0 w-1/2 h-full bg-stadler-base z-20 border-r border-white/5 overflow-hidden flex items-center justify-end">
+                <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=1200" class="h-full w-auto opacity-20 grayscale" alt="Panel Left">
             </div>
-            <div id="right-door" class="absolute right-0 top-0 w-1/2 h-full bg-[#121212] z-20 flex items-center justify-start overflow-hidden border-l border-white/5">
-                <img src="https://images.unsplash.com/photo-1578575437130-527eed3abbec?q=80&w=2070&auto=format&fit=crop" 
-                     class="h-full w-auto max-w-none opacity-30 grayscale contrast-125" alt="Logistics Right">
+            <div id="right-door" class="absolute right-0 top-0 w-1/2 h-full bg-stadler-base z-20 border-l border-white/5 overflow-hidden flex items-center justify-start">
+                <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=1200" class="h-full w-auto opacity-20 grayscale" alt="Panel Right">
             </div>
-
-            <!-- Vídeo/Imagem que surge no fundo -->
             <div class="absolute inset-0 z-10">
                 <video autoplay muted loop playsinline class="w-full h-full object-cover">
                     <source src="https://assets.mixkit.co/videos/preview/mixkit-cargo-ship-leaving-port-at-sunset-10022-large.mp4" type="video/mp4">
                 </video>
                 <div class="absolute inset-0 bg-stadler-base/60"></div>
             </div>
-
-            <!-- Texto que surge no centro -->
             <div id="expansion-text" class="relative z-30 text-center opacity-0 scale-90">
                 <h2 class="font-tech text-4xl md:text-7xl text-white font-bold tracking-tighter uppercase mb-6">Conectando<br><span class="text-stadler-red">Negócios</span></h2>
-                <p class="font-mono text-xs text-white/50 tracking-[0.4em] uppercase">Desde 2010 superando expectativas</p>
+                <p class="font-mono text-xs text-white/50 tracking-[0.4em] uppercase">Superando expectativas desde 2010</p>
             </div>
         </div>
     </section>
 
-    <!-- Final CTA & Footer -->
-    <section id="contato" class="relative z-30 bg-stadler-base py-32 px-6">
-        <div class="max-w-7xl mx-auto text-center">
-            <div class="reveal">
-                <p class="text-stadler-red font-mono text-[10px] tracking-[0.4em] uppercase mb-8">Pronto para a próxima rota?</p>
-                <h2 class="font-tech text-4xl md:text-8xl text-white font-bold tracking-tighter uppercase mb-16 leading-tight">
-                    ENTRE EM <br> <span class="text-transparent" style="-webkit-text-stroke: 1px rgba(255,255,255,0.3);">CONTATO</span>
-                </h2>
+    <!-- CONTATO E UNIDADES -->
+    <section id="contato" class="py-32 bg-stadler-base px-8 border-t border-white/5">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-24 reveal">
+                <p class="text-stadler-red font-mono text-[10px] tracking-[0.4em] uppercase mb-8">Ready to move?</p>
+                <h2 class="font-tech text-4xl md:text-7xl text-white font-bold tracking-tighter uppercase">Fale Conosco</h2>
             </div>
             
-            <div class="flex flex-wrap justify-center gap-12 mb-24">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-16 mb-24">
                 <div class="reveal">
-                    <p class="font-mono text-[8px] text-white/30 uppercase tracking-widest mb-4">Comercial</p>
-                    <a href="tel:4132184838" class="font-tech text-xl text-white hover:text-stadler-red transition-all">(41) 3218-4838</a>
+                    <h4 class="font-tech text-stadler-red text-[10px] mb-6 uppercase tracking-[0.3em]">Matriz Piraquara</h4>
+                    <p class="text-white/40 text-[11px] font-mono leading-relaxed uppercase">
+                        Rua Richard Lickfeld, 1152 – Guarituba<br>CEP: 83.310-440<br>Telefone: (41) 3218-4838
+                    </p>
                 </div>
                 <div class="reveal">
-                    <p class="font-mono text-[8px] text-white/30 uppercase tracking-widest mb-4">Email Oficial</p>
-                    <a href="mailto:contato@stadlerlog.com.br" class="font-tech text-xl text-white hover:text-stadler-red transition-all lowercase">contato@stadlerlog.com.br</a>
+                    <h4 class="font-tech text-stadler-red text-[10px] mb-6 uppercase tracking-[0.3em]">Unidade SJP</h4>
+                    <p class="text-white/40 text-[11px] font-mono leading-relaxed uppercase">
+                        Av. Rui Barbosa, 8251 – Centro<br>CEP: 83.035-320
+                    </p>
+                </div>
+                <div class="reveal">
+                    <h4 class="font-tech text-stadler-red text-[10px] mb-6 uppercase tracking-[0.3em]">Filial Itajaí</h4>
+                    <p class="text-white/40 text-[11px] font-mono leading-relaxed uppercase">
+                        Rua Reinaldo Schmithausen, 1845 – Cordeiros<br>CEP: 88.310-003
+                    </p>
                 </div>
             </div>
 
-            <div class="reveal pt-24 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-8">
+            <div class="reveal pt-24 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-10">
                 <img src="logo-white.png" alt="Stadler" class="h-8 object-contain opacity-50" 
                      onerror="this.src='https://www.stadlerlog.com.br/wp-content/uploads/249.png'; this.style.filter='brightness(0) invert(1)';" />
-                <p class="font-mono text-[8px] text-white/20 uppercase tracking-widest">© 2026 STADLER LOGÍSTICA. TODOS OS DIREITOS RESERVADOS.</p>
+                <p class="font-mono text-[8px] text-white/20 uppercase tracking-[0.5em]">© 2026 STADLER LOGÍSTICA. TODOS OS DIREITOS RESERVADOS.</p>
             </div>
         </div>
     </section>
-
-    <!-- JS for Mobile Menu -->
-    <script>
-        const menuBtn = document.getElementById('mobile-menu-btn');
-        const closeBtn = document.getElementById('close-menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-        const mobileLinks = document.querySelectorAll('.mobile-link');
-
-        const toggleMenu = () => {
-            mobileMenu.classList.toggle('translate-x-full');
-            document.body.classList.toggle('overflow-hidden');
-        };
-
-        menuBtn?.addEventListener('click', toggleMenu);
-        closeBtn?.addEventListener('click', toggleMenu);
-        mobileLinks.forEach(link => link.addEventListener('click', toggleMenu));
-    </script>
-
-            </div>
-            <div id="panel-left" class="absolute inset-y-0 left-0 w-1/2 z-10 bg-stadler-base border-r border-white/5 overflow-hidden">
-                <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=1200" class="absolute right-0 h-full w-[200%] object-cover opacity-40 grayscale" loading="lazy">
-            </div>
-            <div id="panel-right" class="absolute inset-y-0 right-0 w-1/2 z-10 bg-stadler-base border-l border-white/5 overflow-hidden">
-                <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=1200" class="absolute left-0 h-full w-[200%] object-cover opacity-40 grayscale" loading="lazy">
-            </div>
-            <div class="relative z-20 h-full flex items-center justify-center text-center px-8">
-                <div class="max-w-4xl">
-                    <h2 class="font-tech text-3xl md:text-6xl font-bold text-white tracking-tighter mb-8 leading-tight">
-                        CUIDANDO DA SUA CARGA COM <br>
-                        <span class="text-stadler-red">QUALIDADE E EFICIÊNCIA</span>
-                    </h2>
-                    <p class="font-mono text-[10px] tracking-[0.5em] text-white/50 uppercase">Desde 2010 superando expectativas</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Sobre Nós (Densa) -->
-    <section id="sobre" class="py-40 relative z-30 bg-stadler-surface border-y border-white/5">
-        <div class="max-w-7xl mx-auto px-8">
-            <div class="grid lg:grid-cols-2 gap-32 items-start">
-                <div class="reveal">
-                    <p class="font-mono text-[9px] uppercase tracking-[0.6em] text-stadler-red mb-6">Conheça mais sobre nós</p>
-                    <h2 class="font-tech text-3xl md:text-5xl font-bold text-white tracking-tighter leading-tight uppercase mb-12">
-                        Referência em <br><span class="text-stadler-red">Logística e Comex</span>
-                    </h2>
-                    <div class="font-mono text-xs text-white/50 leading-loose uppercase tracking-wider space-y-8">
-                        <p>Fundada em 2010, a STADLER atualmente presta serviços de Transporte Rodoviário de Cargas Nacional, Transportador Aduaneiro (DTA), Operador Logístico e Armazenagem.</p>
-                        <p>Nossa especialidade são as mercadorias do comércio exterior advindas de portos e aeroportos dos estados do Paraná e Santa Catarina.</p>
-                        <p>Temos veículos disponíveis para atender a todas as necessidades aduaneiras. Além disso, eles estão diariamente presentes nos maiores aeroportos de ambos estados, como o Afonso Pena (Curitiba – PR) e Navegantes (SC), como também nos grandes portos: o Terminal de Contêineres de Paranaguá (TCP-PR), Porto Seco de Itajaí – SC (Multilog) e os portos de Itajaí e Itapoá.</p>
-                    </div>
-                </div>
-                <div class="grid grid-cols-1 gap-12 reveal">
-                    <div class="p-10 bg-black/40 border border-white/5 rounded-sm">
-                        <h4 class="font-tech text-sm text-stadler-red tracking-widest uppercase mb-6">Nossa Missão</h4>
-                        <p class="font-mono text-xs text-white/40 leading-relaxed uppercase">Buscar a melhoria continua dos nossos serviços, desenvolvendo soluções logísticas de qualidade para clientes e parceiros.</p>
-                    </div>
-                    <div class="p-10 bg-black/40 border border-white/5 rounded-sm">
-                        <h4 class="font-tech text-sm text-stadler-red tracking-widest uppercase mb-6">Nossa Visão</h4>
-                        <p class="font-mono text-xs text-white/40 leading-relaxed uppercase">Excelência em serviços logísticos, atendendo completamente as necessidades dos nossos clientes.</p>
-                    </div>
-                    <div class="p-10 bg-black/40 border border-white/5 rounded-sm">
-                        <h4 class="font-tech text-sm text-stadler-red tracking-widest uppercase mb-6">Nossos Valores</h4>
-                        <div class="grid grid-cols-2 gap-4">
-                            <span class="font-mono text-[10px] text-white/30 uppercase tracking-widest">• Ética</span>
-                            <span class="font-mono text-[10px] text-white/30 uppercase tracking-widest">• Qualidade</span>
-                            <span class="font-mono text-[10px] text-white/30 uppercase tracking-widest">• Transparência</span>
-                            <span class="font-mono text-[10px] text-white/30 uppercase tracking-widest">• Respeito</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Serviços Detalhados (Bento Expanded) -->
-    <section id="servicos" class="py-40 relative z-30 bg-stadler-base">
-        <div class="max-w-7xl mx-auto px-8">
-            <div class="mb-24 flex flex-col md:flex-row justify-between items-end gap-10 reveal">
-                <div class="max-w-xl">
-                    <p class="font-mono text-[9px] uppercase tracking-[0.6em] text-stadler-red mb-6">O que fazemos</p>
-                    <h2 class="font-tech text-3xl md:text-6xl font-bold text-white tracking-tighter leading-tight uppercase">
-                        Soluções de <br><span class="text-white/20">Alto Rigor</span>
-                    </h2>
-                </div>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
-                <!-- Transporte Comex -->
-                <div class="md:col-span-8 group relative p-12 bg-stadler-surface border border-white/5 rounded-sm overflow-hidden glow-card">
-                    <div class="relative z-10">
-                        <i data-lucide="globe" class="text-stadler-red w-12 h-12 mb-10"></i>
-                        <h4 class="font-tech text-3xl font-bold text-white mb-8 uppercase">Transporte de Comex</h4>
-                        <div class="font-mono text-xs text-white/40 max-w-2xl leading-relaxed space-y-6 uppercase tracking-wider">
-                            <p>Transportamos diariamente contêineres de todos e quaisquer tipos, assim como cargas overzise em Flat Rack e Open Top, cargas soltas LCL, entre muitas outras.</p>
-                            <p>Trabalhamos com habilitação própria para transporte de mercadorias em Trânsito Aduaneiro (DTA).</p>
-                            <div class="grid grid-cols-2 gap-4 pt-4 border-t border-white/5">
-                                <span class="text-[10px] flex items-center gap-2"><div class="w-1 h-1 bg-stadler-red"></div> VEÍCULOS PRÓPRIOS</span>
-                                <span class="text-[10px] flex items-center gap-2"><div class="w-1 h-1 bg-stadler-red"></div> ATENDIMENTO NACIONAL</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="absolute top-0 right-0 w-1/2 h-full opacity-5 grayscale group-hover:opacity-20 transition-opacity">
-                        <img src="https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&q=80&w=600" class="w-full h-full object-cover" loading="lazy">
-                    </div>
-                </div>
-
-                <!-- Armazenagem -->
-                <div class="md:col-span-4 p-12 bg-stadler-surface border border-white/5 rounded-sm glow-card">
-                    <i data-lucide="warehouse" class="text-stadler-red w-10 h-10 mb-10"></i>
-                    <h4 class="font-tech text-xl font-bold text-white mb-8 uppercase">Armazenagem</h4>
-                    <div class="font-mono text-[10px] text-white/30 leading-relaxed space-y-6 uppercase tracking-widest">
-                        <p>10.000 m² de armazém verticalizado, 12 docas, 3 plataformas e balança para veículos.</p>
-                        <p>Equipe de desova e estufagem de contêineres e veículos. Gestão completa de estoques.</p>
-                        <div class="flex flex-wrap gap-2 pt-6">
-                            <span class="bg-white/5 px-3 py-1 rounded-full border border-white/10">CROSS DOCKING</span>
-                            <span class="bg-white/5 px-3 py-1 rounded-full border border-white/10">EXPEDIÇÃO</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Operador Logístico -->
-                <div class="md:col-span-12 p-12 bg-stadler-surface border border-white/5 rounded-sm glow-card flex flex-col md:flex-row gap-16 items-center">
-                    <div class="flex-1">
-                        <i data-lucide="truck" class="text-stadler-red w-10 h-10 mb-10"></i>
-                        <h4 class="font-tech text-3xl font-bold text-white mb-8 uppercase">Operador Logístico</h4>
-                        <p class="font-mono text-xs text-white/30 leading-relaxed uppercase tracking-widest max-w-2xl">Trabalhamos no segmento de distribuição das mercadorias para todo o território nacional. Acompanhamos todas as transportadoras subcontratadas de transporte fracionado com um planejamento e execução em níveis exigentes.</p>
-                    </div>
-                    <div class="flex-1 w-full bg-black/40 p-10 border border-white/5 rounded-lg">
-                        <h5 class="font-tech text-[10px] text-white mb-6 tracking-widest uppercase">Segurança Operacional</h5>
-                        <ul class="space-y-4 font-mono text-[9px] text-white/30 uppercase tracking-[0.2em]">
-                            <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-stadler-red"></i> Gerenciadora de Risco Ativa</li>
-                            <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-stadler-red"></i> Apólices RCTR-C e RCF-DC</li>
-                            <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-stadler-red"></i> Monitoramento Interno e Externo 24h</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Horizontal Technology Section -->
-    <section id="tecnologia" class="relative bg-stadler-base overflow-hidden">
-        <div class="horizontal-scroll-wrapper flex">
-            <div class="h-screen w-screen flex-shrink-0 flex items-center justify-center p-8 border-r border-white/5">
-                <div class="max-w-4xl text-center">
-                    <p class="font-mono text-[9px] uppercase tracking-[0.6em] text-stadler-red mb-10">Monitoramento 24/7</p>
-                    <h2 class="font-tech text-4xl md:text-7xl font-bold text-white tracking-tighter uppercase leading-tight">
-                        MONITORAMENTO <br><span class="text-stadler-red">24 HORAS</span>
-                    </h2>
-                </div>
-            </div>
-            <div class="h-screen w-screen flex-shrink-0 flex items-center justify-center p-8 border-r border-white/5 bg-stadler-surface/30">
-                <div class="grid md:grid-cols-2 gap-20 items-center max-w-7xl text-left">
-                    <div class="line-accent h-64 hidden md:block"></div>
-                    <div>
-                        <h4 class="font-tech text-3xl font-bold text-white mb-8 uppercase tracking-tighter">Rigidez em Segurança</h4>
-                        <p class="font-mono text-xs text-white/40 leading-relaxed mb-10 uppercase tracking-widest">Contamos com gerenciamento de risco rigoroso, monitoramento interno e externo, além de tecnologia de trava de 5ª roda e iscas eletrônicas.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Unidades (Footer Info) -->
-    <section id="contato" class="py-40 bg-stadler-surface">
-        <div class="max-w-7xl mx-auto px-8 grid lg:grid-cols-3 gap-20">
-            <div>
-                <h4 class="font-tech text-sm text-white tracking-widest uppercase mb-10">Matriz Piraquara</h4>
-                <p class="font-mono text-[10px] text-white/40 leading-loose uppercase tracking-widest">
-                    Rua Madre Tereza de Calcutá, 445<br>Jardim Primavera - Piraquara/PR<br>Saída direta para Litoral, SP e SC.
-                </p>
-            </div>
-            <div>
-                <h4 class="font-tech text-sm text-white tracking-widest uppercase mb-10">Unidade SJP</h4>
-                <p class="font-mono text-[10px] text-white/40 leading-loose uppercase tracking-widest">
-                    Rua Francisco Munõz madrid, 295<br>Barracão 1 - Sala 7 - SJP/PR<br>Atendimento aeroportuário Afonso Pena.
-                </p>
-            </div>
-            <div>
-                <h4 class="font-tech text-sm text-white tracking-widest uppercase mb-10">Unidade Itajaí</h4>
-                <p class="font-mono text-[10px] text-white/40 leading-loose uppercase tracking-widest">
-                    Rua Samuel Heusi, 463<br>Sala 411 - Box 148 - Centro<br>Itajai/SC - CEP 88301-320
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <footer class="py-20 border-t border-white/5 bg-stadler-base">
-        <div class="max-w-7xl mx-auto px-8 flex flex-col md:flex-row justify-between items-center gap-10">
-            <img src="logo-white.png" alt="Stadler" class="h-8 object-contain opacity-40" 
-                 onerror="this.src='https://www.stadlerlog.com.br/wp-content/uploads/249.png'; this.style.filter='brightness(0) invert(1)';" />
-            <div class="flex gap-10 font-mono text-[8px] text-white/20 uppercase tracking-[0.5em]">
-                <a href="tel:4132184838" class="hover:text-stadler-red transition-all">(41) 3218-4838</a>
-                <a href="https://www.instagram.com/stadlerlogistica/" target="_blank" class="hover:text-stadler-red transition-all">Instagram</a>
-            </div>
-            <p class="font-mono text-[8px] text-white/20 uppercase tracking-[0.5em]">© 2026 STADLER LOGÍSTICA</p>
-        </div>
-    </footer>
 
     <script>
         lucide.createIcons();
         gsap.registerPlugin(ScrollTrigger);
 
+        // Mobile Menu
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const closeBtn = document.getElementById('close-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const toggleMenu = () => { mobileMenu.classList.toggle('translate-x-full'); document.body.classList.toggle('overflow-hidden'); };
+        menuBtn?.addEventListener('click', toggleMenu);
+        closeBtn?.addEventListener('click', toggleMenu);
+        document.querySelectorAll('.mobile-link').forEach(link => link.addEventListener('click', toggleMenu));
+
+        // Scroll Navbar
         window.addEventListener('scroll', () => {
             const nav = document.getElementById('navbar');
             if (window.scrollY > 50) nav.classList.add('scrolled');
             else nav.classList.remove('scrolled');
         });
 
-        // Mouse Glow Tracking
+        // Mouse Glow
         const glow = document.getElementById('cursor-glow');
         document.addEventListener('mousemove', (e) => {
-            if (glow) {
-                gsap.to(glow, {
-                    left: e.clientX,
-                    top: e.clientY,
-                    duration: 0.8,
-                    ease: "power2.out"
-                });
-            }
+            if (glow) { gsap.to(glow, { left: e.clientX, top: e.clientY, duration: 0.8, ease: "power2.out" }); }
         });
 
-        const magneticElements = document.querySelectorAll('.magnetic');
-        magneticElements.forEach(el => {
-            el.addEventListener('mousemove', (e) => {
-                const rect = el.getBoundingClientRect();
-                const x = e.clientX - rect.left - rect.width / 2;
-                const y = e.clientY - rect.top - rect.height / 2;
-                gsap.to(el, { x: x * 0.4, y: y * 0.4, duration: 0.4, ease: "power2.out" });
-            });
-            el.addEventListener('mouseleave', () => {
-                gsap.to(el, { x: 0, y: 0, duration: 0.6, ease: "elastic.out(1, 0.3)" });
-            });
-        });
-
-        document.querySelectorAll('.counter').forEach(counter => {
-            const target = +counter.getAttribute('data-target');
-            gsap.to(counter, {
-                innerText: target,
-                duration: 2.5,
-                snap: { innerText: 1 },
-                scrollTrigger: { trigger: counter, start: "top 90%" }
-            });
-        });
-
+        // Scroll Expansion
         const expansionSection = document.getElementById('expansion-section');
-        gsap.to("#panel-left", { xPercent: -105, scrollTrigger: { trigger: expansionSection, start: "top top", end: "bottom bottom", scrub: 1 } });
-        gsap.to("#panel-right", { xPercent: 105, scrollTrigger: { trigger: expansionSection, start: "top top", end: "bottom bottom", scrub: 1 } });
+        gsap.to("#left-door", { xPercent: -100, scrollTrigger: { trigger: expansionSection, start: "top top", end: "bottom bottom", scrub: 1 } });
+        gsap.to("#right-door", { xPercent: 100, scrollTrigger: { trigger: expansionSection, start: "top top", end: "bottom bottom", scrub: 1 } });
+        gsap.to("#expansion-text", { opacity: 1, scale: 1, scrollTrigger: { trigger: expansionSection, start: "top 20%", end: "center center", scrub: 1 } });
 
-        const horizontalWrapper = document.querySelector('.horizontal-scroll-wrapper');
-        gsap.to(horizontalWrapper, {
-            x: () => -(horizontalWrapper.scrollWidth - window.innerWidth),
-            ease: "none",
-            scrollTrigger: { trigger: "#tecnologia", start: "top top", end: () => `+=${horizontalWrapper.scrollWidth}`, scrub: 1, pin: true }
-        });
-
+        // Reveal Observer
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
         }, { threshold: 0.1 });
