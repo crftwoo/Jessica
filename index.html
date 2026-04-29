@@ -65,6 +65,31 @@
             background-size: 60px 60px;
         }
 
+        /* Efeito de Mouse Refinado - Apenas Contorno */
+        .mouse-glow {
+            position: fixed;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(193, 24, 21, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            mix-blend-mode: screen;
+            transition: opacity 0.3s ease;
+        }
+
+        .glass {
+            background: rgba(18, 18, 18, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: border-color 0.4s ease, transform 0.4s ease;
+        }
+        .glass:hover {
+            border-color: rgba(193, 24, 21, 0.4);
+            background: rgba(22, 22, 22, 0.9);
+        }
+
         .reveal {
             opacity: 0;
             transform: translateY(30px);
@@ -126,6 +151,7 @@
     <div class="fixed inset-0 hero-gradient pointer-events-none"></div>
 
     <!-- Navigation -->
+    <div class="mouse-glow" id="cursor-glow"></div>
     <nav id="navbar" class="fixed top-0 w-full z-50 px-6 py-4 md:py-8 glass-nav">
         <div class="max-w-7xl mx-auto flex items-center justify-between">
             <div class="flex items-center gap-4">
@@ -602,6 +628,19 @@
             const nav = document.getElementById('navbar');
             if (window.scrollY > 50) nav.classList.add('scrolled');
             else nav.classList.remove('scrolled');
+        });
+
+        // Mouse Glow Tracking
+        const glow = document.getElementById('cursor-glow');
+        document.addEventListener('mousemove', (e) => {
+            if (glow) {
+                gsap.to(glow, {
+                    left: e.clientX,
+                    top: e.clientY,
+                    duration: 0.8,
+                    ease: "power2.out"
+                });
+            }
         });
 
         const magneticElements = document.querySelectorAll('.magnetic');
