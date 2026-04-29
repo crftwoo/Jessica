@@ -142,6 +142,18 @@
             width: 2px;
             background: linear-gradient(to bottom, #C11815, transparent);
         }
+
+        /* Animações de Impacto Imediato */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fadeIn { animation: fadeIn 1.2s ease-out forwards; }
+        .animate-slideUp { animation: slideUp 1s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
     </style>
 </head>
 <body class="font-sans">
@@ -187,36 +199,49 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section id="home" class="relative min-h-screen flex items-center justify-center overflow-hidden px-6">
+    <!-- Hero Section (Impacto Imediato) -->
+    <section id="home" class="relative min-h-screen flex items-center justify-center overflow-hidden">
+        <!-- Video Background Layer -->
         <div class="absolute inset-0 z-0">
-            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] md:w-[800px] h-[300px] md:h-[800px] opacity-20">
-                <div class="absolute inset-0 border border-stadler-navy/20 rounded-full animate-[ping_10s_linear_infinite]"></div>
-                <div class="absolute inset-20 border border-stadler-navy/30 rounded-full animate-[ping_8s_linear_infinite]"></div>
+            <video autoplay muted loop playsinline class="w-full h-full object-cover opacity-40 grayscale contrast-125">
+                <source src="https://assets.mixkit.co/videos/preview/mixkit-commercial-container-ship-in-the-ocean-at-sunset-10023-large.mp4" type="video/mp4">
+            </video>
+            <div class="absolute inset-0 bg-gradient-to-b from-stadler-base/80 via-stadler-navy/60 to-stadler-base"></div>
+        </div>
+
+        <!-- Hero Content -->
+        <div class="max-w-7xl mx-auto px-6 relative z-10 text-center pt-20">
+            <div class="inline-flex items-center gap-3 px-6 py-2 rounded-full bg-stadler-red/10 border border-stadler-red/30 mb-8 animate-fadeIn">
+                <div class="w-2 h-2 rounded-full bg-stadler-red animate-pulse"></div>
+                <span class="font-mono text-[10px] md:text-xs uppercase tracking-[0.3em] text-white font-bold">Logística & Comércio Exterior</span>
+            </div>
+            
+            <h1 class="font-tech text-4xl md:text-8xl font-black text-white mb-6 tracking-tighter leading-none animate-slideUp">
+                STADLER<br>
+                <span class="text-stadler-red">LOGÍSTICA</span>
+            </h1>
+
+            <div class="h-1 w-24 bg-stadler-red mx-auto mb-10"></div>
+
+            <p class="font-mono text-xs md:text-lg text-white/70 max-w-2xl mx-auto leading-relaxed mb-12 uppercase tracking-[0.2em] animate-fadeIn">
+                Qualidade em Transporte e Logística.<br>
+                <span class="text-white/40 text-[10px] md:text-xs">Desde 2010 superando as expectativas de nossos clientes.</span>
+            </p>
+
+            <div class="flex flex-col sm:flex-row gap-6 justify-center items-center animate-fadeIn" style="animation-delay: 0.4s">
+                <a href="#contato" class="group relative px-12 py-5 bg-stadler-red text-white font-tech text-xs font-bold tracking-[0.3em] overflow-hidden transition-all hover:scale-105 active:scale-95 shadow-2xl shadow-stadler-red/20">
+                    <span class="relative z-10">SOLICITAR ORÇAMENTO</span>
+                </a>
+                <a href="#sobre" class="px-12 py-5 border border-white/20 text-white font-tech text-[10px] font-bold tracking-[0.3em] hover:bg-white hover:text-black transition-all">
+                    VER ESTRUTURA
+                </a>
             </div>
         </div>
 
-        <div class="max-w-7xl mx-auto relative z-10 text-center">
-            <div class="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-stadler-navy/10 border border-stadler-navy/20 mb-6 md:mb-8 reveal-text">
-                <div class="w-2 h-2 rounded-full bg-stadler-red animate-pulse"></div>
-                <span class="font-mono text-[8px] md:text-[10px] uppercase tracking-widest text-stadler-red font-bold">Logística e Comércio Exterior</span>
-            </div>
-            
-            <h1 class="font-tech text-3xl md:text-8xl font-bold text-white mb-6 md:mb-8 tracking-tighter reveal-text">
-                STADLER <br>
-                <span class="text-transparent" style="-webkit-text-stroke: 1px rgba(255,255,255,0.3);">LOGÍSTICA</span>
-            </h1>
-
-            <p class="font-mono text-[10px] md:text-sm text-white/40 max-w-2xl mx-auto leading-relaxed mb-8 md:mb-12 uppercase tracking-widest px-4">
-                Oferecer o melhor serviço, com foco na qualidade, a fim de criar uma relação de confiança entre nós e o cliente.
-            </p>
-
-            <div class="flex flex-col sm:flex-row gap-6 justify-center items-center reveal-text" style="animation-delay: 0.5s">
-                <a href="tel:4132184838" class="magnetic group relative px-8 md:px-10 py-4 md:py-5 bg-white text-black font-tech text-[10px] font-bold tracking-[0.3em] overflow-hidden transition-all">
-                    <span class="relative z-10">SOLICITAR ORÇAMENTO</span>
-                    <div class="absolute inset-0 bg-stadler-red translate-y-full group-hover:translate-y-0 transition-transform"></div>
-                </a>
-            </div>
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4 opacity-30 animate-bounce">
+            <span class="font-mono text-[8px] uppercase tracking-widest text-white">Scroll</span>
+            <div class="w-[1px] h-12 bg-gradient-to-b from-white to-transparent"></div>
         </div>
     </section>
 
