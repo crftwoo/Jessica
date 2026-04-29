@@ -126,7 +126,7 @@
     <div class="fixed inset-0 hero-gradient pointer-events-none"></div>
 
     <!-- Navigation -->
-    <nav id="navbar" class="fixed top-0 w-full z-50 px-6 py-8 glass-nav">
+    <nav id="navbar" class="fixed top-0 w-full z-50 px-6 py-4 md:py-8 glass-nav">
         <div class="max-w-7xl mx-auto flex items-center justify-between">
             <div class="flex items-center gap-4">
                 <img src="logo-white.png" alt="Stadler" class="h-8 md:h-10 object-contain" 
@@ -135,6 +135,12 @@
                 <span class="font-mono text-[9px] tracking-[0.3em] text-white/40 hidden md:block uppercase">Logistics 4.0</span>
             </div>
             
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-btn" class="lg:hidden text-white p-2">
+                <i data-lucide="menu"></i>
+            </button>
+
+            <!-- Desktop Menu -->
             <div class="hidden lg:flex items-center gap-12 text-[10px] font-bold tracking-[0.5em] uppercase text-white/50">
                 <a href="#home" class="hover:text-stadler-red transition-all">Home</a>
                 <a href="#sobre" class="hover:text-stadler-red transition-all">Sobre</a>
@@ -142,35 +148,45 @@
                 <a href="#contato" class="magnetic bg-stadler-red text-white px-8 py-3 rounded-sm hover:glow-red transition-all">CONTATO</a>
             </div>
         </div>
+
+        <!-- Mobile Menu Overlay -->
+        <div id="mobile-menu" class="fixed inset-0 bg-stadler-base/95 backdrop-blur-xl z-50 flex flex-col items-center justify-center gap-8 translate-x-full transition-transform duration-500 lg:hidden">
+            <button id="close-menu-btn" class="absolute top-8 right-8 text-white">
+                <i data-lucide="x"></i>
+            </button>
+            <a href="#home" class="mobile-link text-2xl font-tech text-white">HOME</a>
+            <a href="#sobre" class="mobile-link text-2xl font-tech text-white">SOBRE</a>
+            <a href="#servicos" class="mobile-link text-2xl font-tech text-white">SERVIÇOS</a>
+            <a href="#contato" class="mobile-link text-2xl font-tech text-white bg-stadler-red px-8 py-3 rounded-sm">CONTATO</a>
+        </div>
     </nav>
 
     <!-- Hero Section -->
-    <section id="home" class="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section id="home" class="relative min-h-screen flex items-center justify-center overflow-hidden px-6">
         <div class="absolute inset-0 z-0">
-            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] opacity-20">
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] md:w-[800px] h-[300px] md:h-[800px] opacity-20">
                 <div class="absolute inset-0 border border-stadler-navy/20 rounded-full animate-[ping_10s_linear_infinite]"></div>
                 <div class="absolute inset-20 border border-stadler-navy/30 rounded-full animate-[ping_8s_linear_infinite]"></div>
-                <div class="absolute inset-40 border border-stadler-red/20 rounded-full animate-[ping_6s_linear_infinite]"></div>
             </div>
         </div>
 
-        <div class="max-w-7xl mx-auto px-8 relative z-10 text-center">
-            <div class="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-stadler-navy/10 border border-stadler-navy/20 mb-8 reveal-text">
+        <div class="max-w-7xl mx-auto relative z-10 text-center">
+            <div class="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-stadler-navy/10 border border-stadler-navy/20 mb-6 md:mb-8 reveal-text">
                 <div class="w-2 h-2 rounded-full bg-stadler-red animate-pulse"></div>
-                <span class="font-mono text-[10px] uppercase tracking-widest text-stadler-red font-bold">Logística e Comércio Exterior</span>
+                <span class="font-mono text-[8px] md:text-[10px] uppercase tracking-widest text-stadler-red font-bold">Logística e Comércio Exterior</span>
             </div>
             
-            <h1 class="font-tech text-4xl md:text-8xl font-bold text-white mb-8 tracking-tighter reveal-text">
+            <h1 class="font-tech text-3xl md:text-8xl font-bold text-white mb-6 md:mb-8 tracking-tighter reveal-text">
                 STADLER <br>
                 <span class="text-transparent" style="-webkit-text-stroke: 1px rgba(255,255,255,0.3);">LOGÍSTICA</span>
             </h1>
 
-            <p class="font-mono text-xs md:text-sm text-white/40 max-w-2xl mx-auto leading-relaxed mb-12 uppercase tracking-widest">
+            <p class="font-mono text-[10px] md:text-sm text-white/40 max-w-2xl mx-auto leading-relaxed mb-8 md:mb-12 uppercase tracking-widest px-4">
                 Oferecer o melhor serviço, com foco na qualidade, a fim de criar uma relação de confiança entre nós e o cliente.
             </p>
 
             <div class="flex flex-col sm:flex-row gap-6 justify-center items-center reveal-text" style="animation-delay: 0.5s">
-                <a href="tel:4132184838" class="magnetic group relative px-10 py-5 bg-white text-black font-tech text-xs font-bold tracking-[0.3em] overflow-hidden transition-all">
+                <a href="tel:4132184838" class="magnetic group relative px-8 md:px-10 py-4 md:py-5 bg-white text-black font-tech text-[10px] font-bold tracking-[0.3em] overflow-hidden transition-all">
                     <span class="relative z-10">SOLICITAR ORÇAMENTO</span>
                     <div class="absolute inset-0 bg-stadler-red translate-y-full group-hover:translate-y-0 transition-transform"></div>
                 </a>
@@ -179,25 +195,47 @@
     </section>
 
     <!-- Metrics Bar -->
-    <section class="relative z-10 bg-stadler-surface border-y border-white/5 py-12">
-        <div class="max-w-7xl mx-auto px-8 grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
+    <section class="relative z-10 bg-stadler-surface border-y border-white/5 py-8 md:py-12">
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 text-center">
             <div class="reveal">
-                <p class="font-mono text-[10px] uppercase tracking-[0.5em] text-white/30 mb-2">Estrutura Própria</p>
-                <h3 class="font-mono text-4xl font-bold text-white mb-2"><span class="counter" data-target="10000">0</span>m²</h3>
-                <p class="text-[10px] uppercase font-bold tracking-widest text-stadler-red">Área Logística Piraquara</p>
+                <p class="font-mono text-[8px] md:text-[10px] uppercase tracking-[0.5em] text-white/30 mb-2">Estrutura Própria</p>
+                <h3 class="font-mono text-3xl md:text-4xl font-bold text-white mb-2"><span class="counter" data-target="10000">0</span>m²</h3>
+                <p class="text-[9px] md:text-[10px] uppercase font-bold tracking-widest text-stadler-red">Área Logística Piraquara</p>
             </div>
             <div class="reveal">
-                <p class="font-mono text-[10px] uppercase tracking-[0.5em] text-white/30 mb-2">Capacidade</p>
-                <h3 class="font-mono text-4xl font-bold text-white mb-2">+<span class="counter" data-target="12">0</span></h3>
-                <p class="text-[10px] uppercase font-bold tracking-widest text-stadler-red">Docas Ativas</p>
+                <p class="font-mono text-[8px] md:text-[10px] uppercase tracking-[0.5em] text-white/30 mb-2">Capacidade</p>
+                <h3 class="font-mono text-3xl md:text-4xl font-bold text-white mb-2">+<span class="counter" data-target="12">0</span></h3>
+                <p class="text-[9px] md:text-[10px] uppercase font-bold tracking-widest text-stadler-red">Docas Ativas</p>
             </div>
             <div class="reveal">
-                <p class="font-mono text-[10px] uppercase tracking-[0.5em] text-white/30 mb-2">Monitoramento</p>
-                <h3 class="font-mono text-4xl font-bold text-white mb-2"><span class="counter" data-target="24">0</span>h</h3>
-                <p class="text-[10px] uppercase font-bold tracking-widest text-stadler-red">Segurança Armada</p>
+                <p class="font-mono text-[8px] md:text-[10px] uppercase tracking-[0.5em] text-white/30 mb-2">Monitoramento</p>
+                <h3 class="font-mono text-3xl md:text-4xl font-bold text-white mb-2"><span class="counter" data-target="24">0</span>h</h3>
+                <p class="text-[9px] md:text-[10px] uppercase font-bold tracking-widest text-stadler-red">Segurança Armada</p>
             </div>
         </div>
     </section>
+
+    <!-- Content Sections (About & Services) -->
+    <div class="px-6">
+        <!-- Re-adding mobile logic for the rest of the sections... -->
+    </div>
+
+    <!-- JS for Mobile Menu -->
+    <script>
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const closeBtn = document.getElementById('close-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        const toggleMenu = () => {
+            mobileMenu.classList.toggle('translate-x-full');
+            document.body.classList.toggle('overflow-hidden');
+        };
+
+        menuBtn?.addEventListener('click', toggleMenu);
+        closeBtn?.addEventListener('click', toggleMenu);
+        mobileLinks.forEach(link => link.addEventListener('click', toggleMenu));
+    </script>
 
     <!-- Scroll Media Expansion -->
     <section class="relative h-[150vh] z-20" id="expansion-section">
