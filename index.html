@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="pt-br" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stadler Logística | High-Tech Logistics & Global Trade</title>
+    <meta name="description" content="Stadler Logística: Soluções premium em transporte rodoviário, aduaneiro (DTA) e operador logístico com tecnologia 4.0 e monitoramento 24h.">
+    <meta name="keywords" content="logística, transporte aduaneiro, DTA, comércio exterior, Piraquara, Itajaí">
+    <link rel="canonical" href="https://www.stadlerlog.com.br/">
+    
+    <!-- Open Graph / Social -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Stadler Logística | High-Tech Logistics">
+    <meta property="og:description" content="Operação logística de alta performance com infraestrutura de ponta e monitoramento 24h.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&family=Syncopate:wght@400;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="alternate" type="text/plain" href="llm.txt">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Google Tag Manager / Meta Pixel Placeholders -->
+    <script>
+        // GTM / Analytics Init Placeholder
+        console.log("Tracking Infrastructure Active [LLMO Ready]");
+    </script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        stadler: {
+                            base: '#0A0A0A',
+                            surface: '#121212',
+                            navy: '#012772',
+                            red: '#C11815',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        tech: ['Syncopate', 'sans-serif'],
+                        mono: ['Roboto Mono', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #0A0A0A;
+            color: #a1a1aa;
+            overflow-x: hidden;
+        }
+        
+        /* Glassmorphism Header */
+        .glass-nav {
+            background: rgba(10, 10, 10, 0.0);
+            backdrop-filter: blur(0px);
+            transition: all 0.4s ease;
+        }
+        .glass-nav.scrolled {
+            background: rgba(18, 18, 18, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+        }
+
+        /* Tech Grid Background */
+        .bg-tech-grid {
+            background-image: 
+                linear-gradient(to right, rgba(1, 39, 114, 0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(1, 39, 114, 0.05) 1px, transparent 1px);
+            background-size: 60px 60px;
+        }
+
+        /* Glitch/Reveal Animation */
+        .reveal-text {
+            clip-path: polygon(0 0, 0 0, 0 100%, 0% 100%);
+            animation: reveal 1.5s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+        }
+        @keyframes reveal {
+            0% { clip-path: polygon(0 0, 0 0, 0 100%, 0% 100%); }
+            100% { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
+        }
+
+        .glow-red {
+            box-shadow: 0 0 20px rgba(193, 24, 21, 0.3);
+        }
+
+        .hero-gradient {
+            background: radial-gradient(circle at 50% 50%, rgba(1, 39, 114, 0.1) 0%, transparent 70%);
+        }
+
+        /* Hover Glow Border */
+        .glow-card {
+            position: relative;
+            overflow: hidden;
+        }
+        .glow-card::before {
+            content: '';
+            position: absolute;
+            inset: -1px;
+            background: conic-gradient(from var(--angle), transparent, #C11815, transparent);
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+        @property --angle {
+            syntax: '<angle>';
+            initial-value: 0deg;
+            inherits: false;
+        }
+        .glow-card:hover::before { opacity: 1; animation: rotate 4s linear infinite; }
+        @keyframes rotate { to { --angle: 360deg; } }
+    </style>
+</head>
+<body class="font-sans">
+
+    <!-- Background Layer -->
+    <div class="fixed inset-0 bg-tech-grid pointer-events-none"></div>
+    <div class="fixed inset-0 hero-gradient pointer-events-none"></div>
+
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed top-0 w-full z-50 px-6 py-8 glass-nav">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <div class="flex items-center gap-4">
+                <img src="logo-white.png" alt="Stadler" class="h-8 md:h-10 object-contain" 
+                     onerror="this.src='https://www.stadlerlog.com.br/wp-content/uploads/249.png'; this.style.filter='brightness(0) invert(1)';" />
+                <div class="h-6 w-[1px] bg-white/10 hidden md:block"></div>
+                <span class="font-mono text-[9px] tracking-[0.3em] text-white/40 hidden md:block">SYSTEM v4.0</span>
+            </div>
+            
+            <div class="hidden lg:flex items-center gap-12 text-[10px] font-bold tracking-[0.5em] uppercase text-white/50">
+                <a href="#home" class="hover:text-stadler-red transition-all">Home</a>
+                <a href="#sobre" class="hover:text-stadler-red transition-all">Sobre</a>
+                <a href="#servicos" class="hover:text-stadler-red transition-all">Serviços</a>
+                <a href="#contato" class="bg-stadler-red text-white px-8 py-3 rounded-sm hover:glow-red transition-all text-white">CONTATO</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative min-h-screen flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <!-- Abstração Digital de Fundo (Simulando WebGL) -->
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] opacity-20">
+                <div class="absolute inset-0 border border-stadler-navy/20 rounded-full animate-[ping_10s_linear_infinite]"></div>
+                <div class="absolute inset-20 border border-stadler-navy/30 rounded-full animate-[ping_8s_linear_infinite]"></div>
+                <div class="absolute inset-40 border border-stadler-red/20 rounded-full animate-[ping_6s_linear_infinite]"></div>
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-8 relative z-10 text-center">
+            <div class="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-stadler-navy/10 border border-stadler-navy/20 mb-8 reveal-text">
+                <div class="w-2 h-2 rounded-full bg-stadler-red animate-pulse"></div>
+                <span class="font-mono text-[10px] uppercase tracking-widest text-stadler-red font-bold">Inovação em Comércio Exterior</span>
+            </div>
+            
+            <h1 class="font-tech text-4xl md:text-8xl font-bold text-white mb-8 tracking-tighter reveal-text">
+                LOGÍSTICA E <br>
+                <span class="text-transparent" style="-webkit-text-stroke: 1px rgba(255,255,255,0.3);">COMÉRCIO EXTERIOR</span>
+            </h1>
+
+            <p class="font-mono text-xs md:text-sm text-white/40 max-w-2xl mx-auto leading-relaxed mb-12 uppercase tracking-widest">
+                [ Missão ] Oferecer soluções em logística e comércio exterior, superando as expectativas com ética e transparência absoluta.
+            </p>
+
+            <div class="flex flex-col sm:flex-row gap-6 justify-center items-center reveal-text" style="animation-delay: 0.5s">
+                <a href="tel:4132184838" class="group relative px-10 py-5 bg-white text-black font-tech text-xs font-bold tracking-[0.3em] overflow-hidden transition-all">
+                    <span class="relative z-10">FALAR COM ESPECIALISTA</span>
+                    <div class="absolute inset-0 bg-stadler-red translate-y-full group-hover:translate-y-0 transition-transform"></div>
+                </a>
+                <div class="flex items-center gap-4 text-white/20 font-mono text-[10px] tracking-[0.4em]">
+                    <span class="w-12 h-[1px] bg-white/10"></span>
+                    EST. 2010
+                </div>
+            </div>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4">
+            <span class="font-mono text-[8px] tracking-[0.5em] text-white/20 uppercase">Scroll to explore</span>
+            <div class="w-[1px] h-20 bg-gradient-to-b from-stadler-red to-transparent"></div>
+        </div>
+    </section>
+
+    <!-- Metrics Bar (Authority) -->
+    <section class="relative z-10 bg-stadler-surface border-y border-white/5 py-12">
+        <div class="max-w-7xl mx-auto px-8 grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
+            <div class="reveal">
+                <p class="font-mono text-[10px] uppercase tracking-[0.5em] text-white/30 mb-2">Infraestrutura</p>
+                <h3 class="font-mono text-4xl font-bold text-white mb-2"><span class="counter" data-target="10000">0</span>m²</h3>
+                <p class="text-[10px] uppercase font-bold tracking-widest text-stadler-red">Área Logística</p>
+            </div>
+            <div class="reveal">
+                <p class="font-mono text-[10px] uppercase tracking-[0.5em] text-white/30 mb-2">Capacidade</p>
+                <h3 class="font-mono text-4xl font-bold text-white mb-2">+<span class="counter" data-target="12">0</span></h3>
+                <p class="text-[10px] uppercase font-bold tracking-widest text-stadler-red">Docas & Plataformas</p>
+            </div>
+            <div class="reveal">
+                <p class="font-mono text-[10px] uppercase tracking-[0.5em] text-white/30 mb-2">Monitoramento</p>
+                <h3 class="font-mono text-4xl font-bold text-white mb-2"><span class="counter" data-target="24">0</span>h</h3>
+                <p class="text-[10px] uppercase font-bold tracking-widest text-stadler-red">Segurança Armada</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Scroll Media Expansion Section -->
+    <section class="relative h-[200vh] z-20" id="expansion-section">
+        <div class="sticky top-0 h-screen w-full overflow-hidden">
+            <!-- Background Video (Revealed) -->
+            <div class="absolute inset-0 z-0">
+                <video autoplay muted loop playsinline class="w-full h-full object-cover opacity-60">
+                    <source src="https://assets.mixkit.co/videos/preview/mixkit-cargo-ship-sailing-at-sea-40081-large.mp4" type="video/mp4">
+                </video>
+                <div class="absolute inset-0 bg-gradient-to-b from-stadler-base via-transparent to-stadler-base"></div>
+            </div>
+
+            <!-- Split Panels -->
+            <div id="panel-left" class="absolute inset-y-0 left-0 w-1/2 z-10 bg-stadler-base transition-transform duration-100 ease-out border-r border-white/5 overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=1200" class="absolute right-0 h-full w-[200%] object-cover opacity-40 grayscale" style="max-width: none;">
+            </div>
+            <div id="panel-right" class="absolute inset-y-0 right-0 w-1/2 z-10 bg-stadler-base transition-transform duration-100 ease-out border-l border-white/5 overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=1200" class="absolute left-0 h-full w-[200%] object-cover opacity-40 grayscale" style="max-width: none;">
+            </div>
+
+            <!-- Overlay Content -->
+            <div class="relative z-20 h-full flex items-center justify-center text-center px-8">
+                <div class="max-w-4xl">
+                    <h2 class="font-tech text-3xl md:text-6xl font-bold text-white tracking-tighter mb-8 leading-tight">
+                        OPERANDO NA <br>
+                        <span class="text-stadler-red">VELOCIDADE DO MUNDO</span>
+                    </h2>
+                    <p class="font-mono text-[10px] tracking-[0.5em] text-white/50 uppercase">Excelência em cada etapa da cadeia</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stage 3: Bento Grid Services (Superando a Braver) -->
+    <section id="servicos" class="py-40 relative z-30 bg-stadler-base">
+        <div class="max-w-7xl mx-auto px-8">
+            <div class="mb-24 flex flex-col md:flex-row justify-between items-end gap-10 reveal">
+                <div class="max-w-xl">
+                    <p class="font-mono text-[9px] uppercase tracking-[0.6em] text-stadler-red mb-6">Expertise Operacional</p>
+                    <h2 class="font-tech text-3xl md:text-6xl font-bold text-white tracking-tighter leading-tight uppercase">
+                        Ecossistema de <br><span class="text-white/20">Serviços Premium</span>
+                    </h2>
+                </div>
+                <div class="w-full md:w-auto">
+                    <a href="#contato" class="magnetic inline-flex items-center gap-4 bg-white/5 border border-white/10 text-white px-8 py-4 font-tech text-[10px] tracking-widest hover:bg-white hover:text-black transition-all">
+                        EXPLORAR SOLUÇÕES <i data-lucide="arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+                <!-- Comex (Destaque) -->
+                <div class="md:col-span-8 group relative p-12 bg-stadler-surface border border-white/5 rounded-sm overflow-hidden glow-card">
+                    <div class="relative z-10">
+                        <div class="flex justify-between items-start mb-20">
+                            <i data-lucide="globe" class="text-stadler-red w-12 h-12"></i>
+                            <span class="font-mono text-[8px] text-white/20 uppercase tracking-[0.4em]">Main Expertise</span>
+                        </div>
+                        <h4 class="font-tech text-3xl font-bold text-white mb-6 uppercase">Transporte Comércio Exterior</h4>
+                        <p class="font-mono text-xs text-white/40 max-w-lg leading-relaxed">Transportamos contêineres de todos os tipos, cargas oversize (Flat Rack e Open Top) e cargas soltas LCL com habilitação DTA ativa.</p>
+                    </div>
+                    <!-- Background Visual Element -->
+                    <div class="absolute top-0 right-0 w-1/2 h-full opacity-10 grayscale group-hover:opacity-30 transition-opacity">
+                        <img src="https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&q=80&w=600" class="w-full h-full object-cover" loading="lazy">
+                    </div>
+                </div>
+
+                <!-- Armazenagem -->
+                <div class="md:col-span-4 p-10 bg-stadler-surface border border-white/5 rounded-sm glow-card">
+                    <i data-lucide="warehouse" class="text-stadler-red w-8 h-8 mb-10"></i>
+                    <h4 class="font-tech text-xl font-bold text-white mb-6 uppercase">Armazenagem</h4>
+                    <p class="font-mono text-[10px] text-white/30 leading-relaxed mb-10">10.000 m² de armazém verticalizado com segurança armada 24h e monitoramento full-time.</p>
+                    <div class="flex gap-4">
+                        <span class="text-[8px] font-mono border border-white/10 px-3 py-1 text-white/50">DESOVA</span>
+                        <span class="text-[8px] font-mono border border-white/10 px-3 py-1 text-white/50">ESTUFAGEM</span>
+                    </div>
+                </div>
+
+                <!-- Operador Logístico -->
+                <div class="md:col-span-4 p-10 bg-stadler-surface border border-white/5 rounded-sm glow-card">
+                    <i data-lucide="truck" class="text-stadler-red w-8 h-8 mb-10"></i>
+                    <h4 class="font-tech text-xl font-bold text-white mb-6 uppercase">Operador Logístico</h4>
+                    <p class="font-mono text-[10px] text-white/30 leading-relaxed">Distribuição nacional em cargas fracionadas com planejamento estratégico e execução de alto rigor.</p>
+                </div>
+
+                <!-- Tecnologia/Dashboard -->
+                <div class="md:col-span-8 p-12 bg-stadler-surface border border-white/5 rounded-sm flex flex-col md:flex-row gap-10 items-center overflow-hidden glow-card">
+                    <div class="flex-1">
+                        <p class="font-mono text-[8px] text-stadler-red tracking-[0.5em] uppercase mb-4">Tech Ecosystem</p>
+                        <h4 class="font-tech text-2xl font-bold text-white mb-6 uppercase">Monitoramento 4.0</h4>
+                        <p class="font-mono text-[10px] text-white/30 leading-relaxed">Integração total de ponta a ponta com dashboards de rastreamento em tempo real para sua operação.</p>
+                    </div>
+                    <div class="flex-1 w-full bg-black/40 p-4 border border-white/5 rounded-lg">
+                        <!-- Mockup de Dashboard -->
+                        <div class="space-y-3">
+                            <div class="h-1 w-full bg-stadler-red/20 overflow-hidden"><div class="h-full bg-stadler-red w-[70%]"></div></div>
+                            <div class="h-1 w-full bg-stadler-navy/20 overflow-hidden"><div class="h-full bg-stadler-navy w-[45%]"></div></div>
+                            <div class="h-1 w-full bg-white/10 overflow-hidden"><div class="h-full bg-white/20 w-[90%]"></div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stage 4: Horizontal Scroll Technology Ecosystem -->
+    <section id="tecnologia" class="relative bg-stadler-base overflow-hidden">
+        <div class="horizontal-scroll-wrapper flex">
+            <!-- Intro Slide -->
+            <div class="h-screen w-screen flex-shrink-0 flex items-center justify-center p-8 border-r border-white/5">
+                <div class="max-w-4xl text-center">
+                    <p class="font-mono text-[9px] uppercase tracking-[0.6em] text-stadler-red mb-10">System Ecosystem</p>
+                    <h2 class="font-tech text-4xl md:text-7xl font-bold text-white tracking-tighter uppercase leading-tight">
+                        Logística <br><span class="text-stadler-red">Digital 4.0</span>
+                    </h2>
+                    <div class="mt-20 flex justify-center">
+                        <div class="w-1 h-20 bg-gradient-to-b from-stadler-red to-transparent"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 1: Dashboards -->
+            <div class="h-screen w-screen flex-shrink-0 flex items-center justify-center p-8 border-r border-white/5 bg-stadler-surface/30">
+                <div class="grid md:grid-cols-2 gap-20 items-center max-w-7xl">
+                    <div class="relative group">
+                        <div class="absolute -inset-10 bg-stadler-navy/10 blur-[80px] rounded-full group-hover:bg-stadler-red/5 transition-all"></div>
+                        <div class="relative glass p-6 rounded-lg border-white/10">
+                            <!-- Visual Mockup -->
+                            <div class="flex items-center justify-between mb-8 pb-4 border-b border-white/5">
+                                <span class="font-mono text-[8px] text-white/20 uppercase tracking-widest">Live Tracking Terminal</span>
+                                <div class="flex gap-2"><div class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></div><div class="w-2 h-2 rounded-full bg-yellow-500"></div><div class="w-2 h-2 rounded-full bg-green-500"></div></div>
+                            </div>
+                            <div class="space-y-4">
+                                <div class="h-32 w-full bg-black/50 rounded flex items-end p-4 gap-2">
+                                    <div class="w-full bg-stadler-red/40 h-[40%]"></div><div class="w-full bg-stadler-red h-[70%]"></div><div class="w-full bg-stadler-red/60 h-[50%]"></div><div class="w-full bg-stadler-navy h-[90%]"></div>
+                                </div>
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div class="h-12 bg-white/5 rounded"></div><div class="h-12 bg-white/5 rounded"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 class="font-tech text-3xl font-bold text-white mb-8 uppercase">Visibilidade <br>Total</h4>
+                        <p class="font-mono text-xs text-white/40 leading-relaxed mb-10 uppercase tracking-wider">Monitoramento em tempo real de cada etapa do processo. Informação precisa para decisões estratégicas.</p>
+                        <div class="flex items-center gap-4 text-stadler-red font-mono text-[10px] tracking-widest">
+                            <i data-lucide="activity" class="w-5 h-5"></i> REAL-TIME DATA FLOW
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 2: Global Connectivity -->
+            <div class="h-screen w-screen flex-shrink-0 flex items-center justify-center p-8">
+                <div class="text-center max-w-4xl">
+                    <i data-lucide="globe" class="text-stadler-red w-16 h-16 mx-auto mb-12"></i>
+                    <h4 class="font-tech text-3xl md:text-5xl font-bold text-white mb-10 uppercase tracking-tighter">Conectividade Global</h4>
+                    <p class="font-mono text-xs md:text-sm text-white/40 leading-relaxed mb-16 uppercase tracking-[0.3em]">Integração com os principais portos e aeroportos, garantindo fluidez no desembaraço e transporte aduaneiro.</p>
+                    <a href="#contato" class="magnetic inline-flex items-center gap-6 bg-white text-black px-12 py-6 font-tech text-xs font-bold tracking-widest hover:bg-stadler-red hover:text-white transition-all">
+                        SOLICITAR ACESSO <i data-lucide="lock"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Estrutura (Highlight) -->
+    <section id="estrutura" class="py-40 relative z-30 bg-stadler-base">
+        <div class="max-w-7xl mx-auto px-8">
+            <div class="grid lg:grid-cols-2 gap-32 items-center">
+                <div class="reveal">
+                    <h2 class="font-tech text-3xl md:text-5xl font-bold text-white mb-16 tracking-tighter uppercase leading-tight">Estrutura de <br><span class="text-stadler-red">Alta Disponibilidade</span></h2>
+                    <ul class="space-y-12">
+                        <li class="group flex items-center gap-8">
+                            <span class="font-mono text-stadler-red text-2xl font-bold opacity-30">01</span>
+                            <div>
+                                <p class="text-white font-tech text-sm tracking-widest mb-1 uppercase">10.000 m² Piraquara</p>
+                                <p class="font-mono text-[10px] text-white/30 uppercase tracking-[0.2em]">Centro logístico preparado para qualquer escala</p>
+                            </div>
+                        </li>
+                        <li class="group flex items-center gap-8">
+                            <span class="font-mono text-stadler-red text-2xl font-bold opacity-30">02</span>
+                            <div>
+                                <p class="text-white font-tech text-sm tracking-widest mb-1 uppercase">12 Docas & 3 Plataformas</p>
+                                <p class="font-mono text-[10px] text-white/30 uppercase tracking-[0.2em]">Fluxo operacional contínuo e sem gargalos</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="reveal relative">
+                    <div class="absolute inset-0 bg-stadler-navy/10 blur-[100px] rounded-full"></div>
+                    <img src="https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&q=80&w=1200" class="rounded-sm border border-white/10 shadow-2xl grayscale opacity-60 hover:grayscale-0 transition-all duration-700" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-20 border-t border-white/5 relative z-30 bg-stadler-base">
+        <div class="max-w-7xl mx-auto px-8 grid md:grid-cols-3 gap-12 items-center">
+            <div class="flex items-center gap-4">
+                <img src="logo-white.png" alt="Stadler" class="h-8 object-contain opacity-40 hover:opacity-100 transition-all" loading="lazy"
+                     onerror="this.src='https://www.stadlerlog.com.br/wp-content/uploads/249.png'; this.style.filter='brightness(0) invert(1)';" />
+            </div>
+            <div class="flex justify-center gap-10 font-mono text-[8px] text-white/20 uppercase tracking-[0.5em]">
+                <a href="https://www.instagram.com/stadlerlogistica/" target="_blank" class="hover:text-stadler-red transition-all">Instagram</a>
+                <a href="#" class="hover:text-stadler-red transition-all">Linkedin</a>
+            </div>
+            <div class="text-right font-mono text-[8px] text-white/20 uppercase tracking-[0.5em]">
+                © 2026 STADLER LOGÍSTICA | LLMO OPTIMIZED
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 50) nav.classList.add('scrolled');
+            else nav.classList.remove('scrolled');
+        });
+
+        // Magnetic Mouse Effect (Premium UX)
+        const magneticElements = document.querySelectorAll('.magnetic');
+        magneticElements.forEach(el => {
+            el.addEventListener('mousemove', (e) => {
+                const rect = el.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+                gsap.to(el, {
+                    x: x * 0.4,
+                    y: y * 0.4,
+                    duration: 0.4,
+                    ease: "power2.out"
+                });
+            });
+            el.addEventListener('mouseleave', () => {
+                gsap.to(el, { x: 0, y: 0, duration: 0.6, ease: "elastic.out(1, 0.3)" });
+            });
+        });
+
+        // GSAP Metrics Counter
+        document.querySelectorAll('.counter').forEach(counter => {
+            const target = +counter.getAttribute('data-target');
+            gsap.to(counter, {
+                innerText: target,
+                duration: 2.5,
+                snap: { innerText: 1 },
+                scrollTrigger: {
+                    trigger: counter,
+                    start: "top 90%",
+                }
+            });
+        });
+
+        // GSAP Scroll Expansion
+        const expansionSection = document.getElementById('expansion-section');
+        gsap.to("#panel-left", {
+            xPercent: -105,
+            scrollTrigger: {
+                trigger: expansionSection,
+                start: "top top",
+                end: "bottom bottom",
+                scrub: 1
+            }
+        });
+        gsap.to("#panel-right", {
+            xPercent: 105,
+            scrollTrigger: {
+                trigger: expansionSection,
+                start: "top top",
+                end: "bottom bottom",
+                scrub: 1
+            }
+        });
+
+        // GSAP Horizontal Scroll
+        const horizontalWrapper = document.querySelector('.horizontal-scroll-wrapper');
+        gsap.to(horizontalWrapper, {
+            x: () => -(horizontalWrapper.scrollWidth - window.innerWidth),
+            ease: "none",
+            scrollTrigger: {
+                trigger: "#tecnologia",
+                start: "top top",
+                end: () => `+=${horizontalWrapper.scrollWidth}`,
+                scrub: 1,
+                pin: true,
+                anticipatePin: 1
+            }
+        });
+
+        // Reveal Animations (Intersection Observer)
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('active');
+            });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>
