@@ -1,1 +1,1 @@
-Fix: reduz container 3D do hero em ~20% via scale 0.8 e FOV ajustado de 38 para 46.
+Fix: remove tela azul pós-hero, oculta S do fundo e reposiciona container 3D para direita.

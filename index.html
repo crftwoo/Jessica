@@ -551,14 +551,7 @@
         }
 
         .hero-fallback {
-            position: absolute;
-            inset: 12% 0 auto auto;
-            width: min(56vw, 720px);
-            opacity: 0.13;
-        }
-
-        body.webgl-ready .hero-fallback {
-            opacity: 0.025;
+            display: none;
         }
 
         .about-emblem {
@@ -2220,7 +2213,7 @@
             document.body.classList.add("webgl-ready");
 
             const group = new THREE.Group();
-            group.position.set(1.65, -0.1, 0);
+            group.position.set(3.2, -0.1, 0);
             group.rotation.set(-0.06, -0.72, 0.03);
             group.scale.set(0.8, 0.8, 0.8);
             scene.add(group);
@@ -2319,15 +2312,9 @@
                 progressEl?.style.setProperty("--p", progress.toFixed(4));
             };
 
-            ScrollTrigger.create({
-                trigger: "#hero",
-                start: "top top",
-                end: "+=230%",
-                pin: ".hero-stage",
-                scrub: 0.85,
-                anticipatePin: 1,
-                onUpdate: (self) => updateModel(self.progress)
-            });
+            // Animação suave da câmera sem pin (evita tela vazia)
+            updateModel(0);
+
 
             const resize = () => {
                 const width = mount.clientWidth || window.innerWidth;
