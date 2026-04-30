@@ -899,9 +899,12 @@
             height: min(245px, 26vh);
             transform: translateX(-50%);
             z-index: 3;
-            background:
+            background-image:
                 linear-gradient(135deg, rgba(1, 39, 114, 0.6), rgba(14, 24, 50, 0.8)),
-                url("https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=2070&auto=format&fit=crop") center/cover no-repeat;
+                url("https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=2070&auto=format&fit=crop");
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
             border: 1px solid rgba(255, 255, 255, 0.16);
             box-shadow: 0 28px 90px rgba(0, 0, 0, 0.52);
             overflow: hidden;
@@ -1443,9 +1446,11 @@
             </div>
         </section>
 
-        <!-- Horizontal section removed to prevent duplication and overlapping issues -->        <section class="split-section" id="split">
+        </section>
+
+        <section class="split-section" id="split">
             <div class="split-sticky">
-                <video class="split-video" src="https://assets.mixkit.co/videos/preview/mixkit-cargo-ship-leaving-port-at-sunset-10022-large.mp4" muted loop playsinline preload="none"></video>
+                <video class="split-video" src="https://assets.mixkit.co/videos/preview/mixkit-cargo-ship-leaving-port-at-sunset-10022-large.mp4" muted loop playsinline preload="auto" style="background: #011333;"></video>
                 <div class="split-mask"></div>
                 <div class="split-door split-top"></div>
                 <div class="split-door split-bottom"></div>
@@ -1504,7 +1509,7 @@
                     <div id="unidades">
                         <div class="section-head">
                             <span class="eyebrow">Unidades e Contatos</span>
-                            <h2 class="section-title">TIRE SUAS DÚVIDAS E FAÇA UM ORÇAMENTO</h2>
+                            <h2 class="section-title" style="font-size: clamp(1.8rem, 4vw, 3.2rem);">FALE CONOSCO</h2>
                             <p class="section-text">Qualidade em Transporte e Logística.</p>
                         </div>
                         <div class="addresses">
@@ -1737,38 +1742,8 @@
                 .to(".split-bottom", { yPercent: 118, ease: "none" }, 0.08)
                 .to(".split-content", { y: -22, ease: "none" }, 0.2);
 
-                ScrollTrigger.matchMedia({
-                    "(min-width: 761px)": function () {
-                        const track = document.querySelector(".horizontal-track");
-                        const horizontalDistance = () => Math.max(0, track.scrollWidth - window.innerWidth + 56);
-                        gsap.to(track, {
-                            x: () => -horizontalDistance(),
-                            ease: "none",
-                            scrollTrigger: {
-                                trigger: "#horizontal",
-                                start: "top top",
-                                end: () => `+=${horizontalDistance() + window.innerHeight * 0.4}`,
-                                scrub: 0.85,
-                                pin: ".horizontal-pin",
-                                invalidateOnRefresh: true
-                            }
-                        });
-                    }
-                });
+                /* Horizontal logic removed */
 
-                gsap.utils.toArray(".parallax-img").forEach((img) => {
-                    gsap.to(img, {
-                        "--px": "-32px",
-                        "--py": "-26px",
-                        ease: "none",
-                        scrollTrigger: {
-                            trigger: "#horizontal",
-                            start: "top bottom",
-                            end: "bottom top",
-                            scrub: true
-                        }
-                    });
-                });
 
                 const quoteForm = document.getElementById("quoteForm");
                 const status = document.getElementById("formStatus");
