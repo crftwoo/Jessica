@@ -2312,8 +2312,15 @@
                 progressEl?.style.setProperty("--p", progress.toFixed(4));
             };
 
-            // Animação suave da câmera sem pin (evita tela vazia)
+            // Animação 3D vinculada ao scroll (sem pin para evitar tela vazia)
             updateModel(0);
+            ScrollTrigger.create({
+                trigger: "#hero",
+                start: "top top",
+                end: "bottom top",
+                scrub: 0.85,
+                onUpdate: (self) => updateModel(self.progress)
+            });
 
 
             const resize = () => {

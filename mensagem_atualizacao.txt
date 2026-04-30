@@ -1,1 +1,1 @@
-Fix: remove tela azul pós-hero, oculta S do fundo e reposiciona container 3D para direita.
+Fix: restaura animação 3D do hero vinculada ao scroll sem pin.
