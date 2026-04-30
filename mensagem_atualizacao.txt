@@ -1,1 +1,1 @@
-Fix: restaura efeito 3D reversível do hero com pin e background sólido.
+Fix: adiciona degradê suave entre seções para eliminar quebras bruscas de cor.
