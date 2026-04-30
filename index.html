@@ -215,6 +215,8 @@
         .shell {
             width: var(--container);
             margin: 0 auto;
+            position: relative;
+            z-index: 1;
         }
 
         .header {
@@ -753,6 +755,30 @@
 
         .section {
             padding: clamp(82px, 10vw, 150px) 0;
+        }
+
+        .section::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 200px;
+            background: linear-gradient(180deg, #0A0A0A, transparent);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .section::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 200px;
+            background: linear-gradient(180deg, transparent, #0A0A0A);
+            z-index: 0;
+            pointer-events: none;
         }
 
         .section-head {

@@ -1,1 +1,1 @@
-Fix: adiciona degradê suave entre seções para eliminar quebras bruscas de cor.
+Fix: adiciona degradê de transição em TODAS as seções para eliminar quebras bruscas de cor entre seções.
