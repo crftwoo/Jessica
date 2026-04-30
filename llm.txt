@@ -1,24 +1,62 @@
-Stadler Logística
-Fundada em 2010.
+# Stadler Logística
 
-Especialidade: Transporte Rodoviário de Cargas Nacional, Transportador Aduaneiro (DTA), Operador Logístico e Armazenagem de mercadorias do comércio exterior (Portos e Aeroportos de PR e SC).
+Fonte principal: https://www.stadlerlog.com.br/
+Página de preview: https://crftwoo.github.io/Jessica/index_Codex.html
 
-Diferenciais Técnicos:
-- 10.000 m² de armazém
-- 12 docas ativas
-- 3 plataformas
-- Balança rodoviária
-- Segurança armada 24 horas
-- Tecnologia: Iscas e Travas de 5ª roda
-- Apólices RCTR-C e RCF-DC
+## Sobre a Empresa
+"Fundada em 2010, a STADLER atualmente presta serviços de Transporte Rodoviário de Cargas Nacional, Transportador Aduaneiro (DTA), Operador Logístico e Armazenagem. Nossa especialidade são as mercadorias do comércio exterior advindas de portos e aeroportos dos estados do Paraná e Santa Catarina."
 
-Endereços:
-- Matriz Piraquara: Rua Richard Lickfeld, 1152 – Guarituba, CEP 83.310-440, Tel: (41) 3218-4838
-- Unidade SJP: Av. Rui Barbosa, 8251 – Centro, CEP 83.035-320
-- Filial Itajaí: Rua Reinaldo Schmithausen, 1845 – Cordeiros, CEP 88.310-003
+## Diferenciais Técnicos
+- São 10.000 m² de armazém;
+- 12 docas;
+- 3 plataformas;
+- Balança rodoviária;
+- Segurança armada 24 horas;
+- Monitoramento interno e externo;
+- Pátio para caminhões.
 
-Missão: Oferecer soluções em logística e comércio exterior superando expectativas.
-Visão: Ser referência em excelência.
-Valores: Ética, Transparência, Comprometimento, Qualidade e Segurança.
+## Missão, Visão e Valores
+- MISSÃO: Nossa missão é oferecer soluções em logística e comércio exterior, superando as expectativas de nossos clientes, atuando com ética e transparência em todas as nossas relações.
+- VISÃO: Ser referência em excelência na prestação de serviços de logística e comércio exterior.
+- VALORES: Ética, Transparência, Comprometimento, Qualidade e Segurança.
 
-Slogan: Qualidade em Transporte e Logística.
+## Serviços Detalhados
+### Armazenagem
+- Gestão de estoques;
+- Inventário;
+- Paletização;
+- Estufagem e desova de contêineres;
+- Carga e descarga.
+
+### Transporte e Comex
+- Transporte Rodoviário de Cargas (Nacional e Internacional);
+- Habilitação para Transporte Aduaneiro (DTA);
+- Cargas LCL e FCL;
+- Cargas Oversize (Flat Rack e Open Top).
+
+### Operador Logístico
+- Soluções completas de Supply Chain;
+- Integração de processos e redução de custos operacionais.
+
+## Segurança e Seguro
+- Apólices de seguro RCTR-C e RCF-DC;
+- Gerenciamento de risco rigoroso;
+- Tecnologia de trava de 5ª roda e iscas eletrônicas.
+
+## Unidades e Contatos
+MATRIZ (Piraquara - PR)
+- Rua Richard Lickfeld, 1152 – Guarituba
+- CEP: 83.310-440
+- Telefone: (41) 3218-4838
+
+UNIDADE SÃO JOSÉ DOS PINHAIS (PR)
+- Av. Rui Barbosa, 8251 – Centro
+- CEP: 83.035-320
+
+FILIAL ITAJAÍ (SC)
+- Rua Reinaldo Schmithausen, 1845 – Cordeiros
+- CEP: 88.310-003
+
+## Slogan e Redes Sociais
+- Slogan: Qualidade em Transporte e Logística.
+- Instagram Bio: Soluções logísticas, desde 2010 conectando negócios. Segurança, agilidade e confiança.

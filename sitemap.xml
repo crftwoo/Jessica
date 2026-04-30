@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://www.stadlerlog.com.br/</loc>
-    <lastmod>2026-04-29</lastmod>
+    <loc>https://crftwoo.github.io/Jessica/index_Codex.html</loc>
+    <lastmod>2026-04-30</lastmod>
     <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://crftwoo.github.io/Jessica/llm.txt</loc>
+    <lastmod>2026-04-30</lastmod>
+    <priority>0.8</priority>
   </url>
 </urlset>

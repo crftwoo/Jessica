@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 
 # Sitemap
-Sitemap: https://www.stadlerlog.com.br/sitemap.xml
+Sitemap: https://crftwoo.github.io/Jessica/sitemap.xml
