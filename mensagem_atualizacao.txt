@@ -1,0 +1,1 @@
+Fix: centraliza cards verticalmente removendo padding desnecessário e usando justify-content: center; garante repo local atualizado.
