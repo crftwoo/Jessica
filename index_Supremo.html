@@ -687,9 +687,10 @@
             line-height: 1;
             font-family: "JetBrains Mono", ui-monospace, monospace;
             letter-spacing: 0;
+            white-space: nowrap;
         }
 
-        .metric span {
+        .metric > span {
             color: rgba(255, 255, 255, 0.62);
             font-size: 0.73rem;
             font-weight: 700;
@@ -1363,7 +1364,7 @@
 
                 <div class="metrics" id="metricas" aria-label="Diferenciais Técnicos">
                     <article class="metric glow-card" data-glow>
-                        <strong>+<span data-count="10">0</span> mil m²</strong>
+                        <strong><span data-count="10">0</span>.000m²</strong>
                         <span>Armazém Próprio</span>
                     </article>
                     <article class="metric glow-card" data-glow>
@@ -1451,7 +1452,7 @@
 
         <section class="split-section" id="split">
             <div class="split-sticky">
-                <video class="split-video" src="https://assets.mixkit.co/videos/preview/mixkit-cargo-ship-leaving-port-at-sunset-10022-large.mp4" muted loop playsinline preload="auto" style="background: #011333;"></video>
+                <video class="split-video" src="https://assets.mixkit.co/videos/preview/mixkit-cargo-ship-leaving-port-at-sunset-10022-large.mp4" muted loop playsinline preload="auto" poster="assets/stadler-s-dark.webp" style="background: url('assets/stadler-s-dark.webp') center/cover no-repeat;"></video>
                 <div class="split-mask"></div>
                 <div class="split-door split-top"></div>
                 <div class="split-door split-bottom"></div>
