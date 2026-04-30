@@ -852,6 +852,120 @@
             grid-column: span 2;
         }
 
+        /* ==========================================================
+           SERVICES HORIZONTAL SCROLL (pinned em desktop, swipe em mobile)
+           ========================================================== */
+        .services-horizontal {
+            position: relative;
+            background:
+                linear-gradient(180deg, rgba(255, 255, 255, 0.03), transparent 60%),
+                #0A0A0A;
+            overflow: hidden;
+        }
+
+        .services-intro {
+            padding: clamp(82px, 10vw, 150px) 0 clamp(36px, 5vw, 64px);
+        }
+
+        .services-cue {
+            margin: 8px 0 0;
+            color: rgba(255, 255, 255, 0.46);
+            font-size: 0.74rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.32em;
+        }
+
+        .services-pin {
+            position: relative;
+            display: flex;
+            align-items: center;
+            min-height: 100vh;
+            padding: 40px 0 80px;
+            overflow: hidden;
+        }
+
+        .services-track {
+            display: flex;
+            align-items: stretch;
+            gap: 20px;
+            padding-left: max(18px, calc((100vw - var(--container)) / 2));
+            padding-right: max(18px, calc((100vw - var(--container)) / 2));
+            will-change: transform;
+        }
+
+        .services-card {
+            flex: 0 0 auto;
+            width: min(540px, 78vw);
+            min-height: 460px;
+            padding: clamp(28px, 3.4vw, 46px);
+            display: flex;
+            flex-direction: column;
+            gap: 22px;
+        }
+
+        .services-card .card-list {
+            flex: 1;
+            font-size: 1.02rem;
+        }
+
+        .services-progress {
+            position: absolute;
+            left: max(18px, calc((100vw - var(--container)) / 2));
+            right: max(18px, calc((100vw - var(--container)) / 2));
+            bottom: 28px;
+            height: 1px;
+            background: rgba(255, 255, 255, 0.1);
+            overflow: hidden;
+        }
+
+        .services-progress span {
+            display: block;
+            height: 100%;
+            width: calc(var(--svc-p, 0) * 100%);
+            background: linear-gradient(90deg, var(--blue-hot), var(--red));
+            box-shadow: 0 0 16px rgba(25, 102, 255, 0.6);
+        }
+
+        @media (max-width: 1100px) {
+            .services-pin {
+                min-height: 0;
+                padding: 12px 0 40px;
+                overflow-x: auto;
+                overflow-y: hidden;
+                scroll-snap-type: x mandatory;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+            }
+
+            .services-pin::-webkit-scrollbar {
+                display: none;
+            }
+
+            .services-track {
+                transform: none !important;
+                padding-left: 18px;
+                padding-right: 18px;
+            }
+
+            .services-card {
+                scroll-snap-align: start;
+                width: min(82vw, 440px);
+                min-height: 420px;
+            }
+
+            .services-progress {
+                display: none;
+            }
+        }
+
+        @media (max-width: 760px) {
+            .services-card {
+                width: min(86vw, 380px);
+                min-height: 380px;
+            }
+        }
+
         .bento-card.tall {
             grid-row: span 2;
         }
@@ -1650,15 +1764,20 @@
             </div>
         </section>
 
-        <section class="section" id="servicos">
-            <div class="shell">
-                <div class="section-head center">
-                    <span class="eyebrow">Serviços Detalhados</span>
-                    <h2 class="section-title">Armazenagem — Transporte & Comex — Operador Logístico</h2>
+        <section class="services-horizontal" id="servicos" aria-label="Serviços Detalhados">
+            <div class="services-intro">
+                <div class="shell">
+                    <div class="section-head center">
+                        <span class="eyebrow">Serviços Detalhados</span>
+                        <h2 class="section-title">Armazenagem — Transporte & Comex — Operador Logístico</h2>
+                        <p class="services-cue mono" aria-hidden="true">role para descobrir &nbsp;→</p>
+                    </div>
                 </div>
+            </div>
 
-                <div class="bento">
-                    <article class="bento-card wide glow-card" data-glow>
+            <div class="services-pin" id="servicesPin">
+                <div class="services-track" id="servicesTrack">
+                    <article class="services-card glow-card glass-panel" data-glow>
                         <div class="card-top">
                             <h3 class="card-title">Armazenagem</h3>
                             <span class="icon-chip"><i data-lucide="warehouse"></i></span>
@@ -1672,7 +1791,7 @@
                         </ul>
                     </article>
 
-                    <article class="bento-card tall glow-card" data-glow>
+                    <article class="services-card glow-card glass-panel" data-glow>
                         <div class="card-top">
                             <h3 class="card-title">Transporte & Comex</h3>
                             <span class="icon-chip"><i data-lucide="container"></i></span>
@@ -1685,7 +1804,7 @@
                         </ul>
                     </article>
 
-                    <article class="bento-card glow-card" data-glow>
+                    <article class="services-card glow-card glass-panel" data-glow>
                         <div class="card-top">
                             <h3 class="card-title">Operador Logístico</h3>
                             <span class="icon-chip"><i data-lucide="workflow"></i></span>
@@ -1696,7 +1815,7 @@
                         </ul>
                     </article>
 
-                    <article class="bento-card glow-card" data-glow>
+                    <article class="services-card glow-card glass-panel" data-glow>
                         <div class="card-top">
                             <h3 class="card-title">Diferenciais Técnicos</h3>
                             <span class="icon-chip"><i data-lucide="radar"></i></span>
@@ -1708,9 +1827,9 @@
                         </ul>
                     </article>
                 </div>
-            </div>
-        </section>
 
+                <div class="services-progress" aria-hidden="true"><span id="servicesProgressBar"></span></div>
+            </div>
         </section>
 
         <section class="globe-section" id="globe">
@@ -2057,7 +2176,47 @@
 
                 initGlobe3D(gsap, ScrollTrigger);
 
-                /* Horizontal logic removed */
+                // Scroll horizontal "magnético" da seção de serviços (desktop)
+                // Em telas <=1100px o CSS fallback usa overflow-x nativo (swipe).
+                const servicesPin = document.getElementById("servicesPin");
+                const servicesTrack = document.getElementById("servicesTrack");
+                const servicesProgressBar = document.getElementById("servicesProgressBar")?.parentElement;
+                if (servicesPin && servicesTrack) {
+                    const mm = gsap.matchMedia();
+                    mm.add("(min-width: 1101px) and (prefers-reduced-motion: no-preference)", () => {
+                        const distance = () => {
+                            const trackWidth = servicesTrack.scrollWidth;
+                            const viewport = window.innerWidth;
+                            return Math.max(trackWidth - viewport + 40, 0);
+                        };
+
+                        const tween = gsap.to(servicesTrack, {
+                            x: () => -distance(),
+                            ease: "none",
+                            scrollTrigger: {
+                                trigger: servicesPin,
+                                pin: true,
+                                scrub: 0.8,
+                                start: "top top",
+                                end: () => `+=${distance()}`,
+                                anticipatePin: 1,
+                                invalidateOnRefresh: true,
+                                onUpdate: (self) => {
+                                    if (servicesProgressBar) {
+                                        servicesProgressBar.style.setProperty("--svc-p", self.progress.toFixed(4));
+                                    }
+                                }
+                            }
+                        });
+
+                        return () => {
+                            tween.scrollTrigger?.kill();
+                            tween.kill();
+                            gsap.set(servicesTrack, { clearProps: "transform" });
+                            if (servicesProgressBar) servicesProgressBar.style.removeProperty("--svc-p");
+                        };
+                    });
+                }
 
 
                 const quoteForm = document.getElementById("quoteForm");
