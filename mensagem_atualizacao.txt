@@ -1,1 +1,1 @@
-Fix: restaura animação 3D do hero vinculada ao scroll sem pin.
+Fix: restaura efeito 3D reversível do hero com pin e background sólido.

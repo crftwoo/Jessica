@@ -526,17 +526,18 @@
         .hero {
             position: relative;
             overflow: hidden;
-            background: transparent;
+            background: #0A0A0A;
         }
 
         .hero-stage {
             position: relative;
-            min-height: 75vh;
+            height: 100vh;
+            min-height: 680px;
             padding: calc(var(--header-height) + 40px) 0 80px;
             display: grid;
             place-items: center;
             overflow: hidden;
-            background: linear-gradient(180deg, #0A0A0A 0%, #0A0A0A 60%, transparent 100%);
+            background: #0A0A0A;
         }
 
         .hero-canvas {
@@ -2312,13 +2313,16 @@
                 progressEl?.style.setProperty("--p", progress.toFixed(4));
             };
 
-            // Animação 3D vinculada ao scroll (sem pin para evitar tela vazia)
+            // Animação 3D vinculada ao scroll — pina o hero e explode/fecha o container
             updateModel(0);
             ScrollTrigger.create({
                 trigger: "#hero",
                 start: "top top",
-                end: "bottom top",
+                end: "+=180%",
+                pin: ".hero-stage",
+                pinSpacing: true,
                 scrub: 0.85,
+                anticipatePin: 1,
                 onUpdate: (self) => updateModel(self.progress)
             });
 
