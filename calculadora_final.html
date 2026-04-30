@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador de carga</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-wrapper">
+        <aside class="sidebar">
+            <div class="brand">
+                <h1><i class="fa-solid fa-cubes"></i> Simulador de Carga</h1>
+                <div class="unit-switch">
+                    <span class="u-lbl active" id="lbl-cm">cm</span>
+                    <label class="switch">
+                        <input type="checkbox" id="unitToggle">
+                        <span class="slider round"></span>
+                    </label>
+                    <span class="u-lbl" id="lbl-mm">mm</span>
+                </div>
+            </div>
+
+            <div class="scroll-area">
+                <section class="card">
+                    <div class="card-header">
+                        <h2><i class="fa-solid fa-truck-fast"></i> Veículo</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="vehicle-selector">
+                            <div class="vehicle-option active" data-type="container">
+                                <img src="https://packer.searates.com/images/main-container.png" alt="Container">
+                                <span>Container</span>
+                            </div>
+                            <div class="vehicle-option" data-type="truck">
+                                <img src="https://packer.searates.com/images/main-truck.png" alt="Truck">
+                                <span>Truck</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group" id="containerPresetsWrapper">
+                            <label>Selecione o Container</label>
+                            <select id="containerSelect" class="input-modern">
+                                <option value="20ft">Container 20' Standard</option>
+                                <option value="40ft">Container 40' Standard</option>
+                                <option value="40hc">Container 40' High Cube</option>
+                            </select>
+                        </div>
+
+                        <div class="grid-2col" id="customContainerDim" style="display: grid;">
+                            <div class="form-group">
+                                <label>Compr. (<span class="unit-text">cm</span>)</label>
+                                <input type="number" id="contL" value="589" class="input-modern vehicle-dim" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label>Largura (<span class="unit-text">cm</span>)</label>
+                                <input type="number" id="contW" value="235" class="input-modern vehicle-dim" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label>Altura (<span class="unit-text">cm</span>)</label>
+                                <input type="number" id="contH" value="239" class="input-modern vehicle-dim" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label>Cap. Peso (kg)</label>
+                                <input type="number" id="contMaxW" value="24000" class="input-modern vehicle-dim" readonly>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="card">
+                    <div class="card-header">
+                        <h2><i class="fa-solid fa-box-open"></i> Suas Cargas</h2>
+                    </div>
+                    <div class="card-body">
+                        <div id="cargoList"></div>
+                        <button id="addCargoBtn" class="btn btn-secondary w-100">
+                            <i class="fa-solid fa-plus"></i> Nova Carga
+                        </button>
+                    </div>
+                </section>
+            </div>
+            
+            <div class="sidebar-footer">
+                <button id="calculateBtn" class="btn btn-primary w-100 btn-glow">
+                    <i class="fa-solid fa-play"></i> Calcular Estufagem
+                </button>
+            </div>
+        </aside>
+
+        <main class="viewport">
+            <div class="stats-bar">
+                <div class="stat-box">
+                    <i class="fa-solid fa-boxes-packing"></i>
+                    <div>
+                        <span class="stat-title">Caixas Alocadas</span>
+                        <strong id="stat-count">0 / 0</strong>
+                    </div>
+                </div>
+                <div class="stat-box">
+                    <i class="fa-solid fa-ruler-combined"></i>
+                    <div>
+                        <span class="stat-title">Ocupação (Vol)</span>
+                        <strong id="stat-vol">0.00%</strong>
+                    </div>
+                </div>
+                <div class="stat-box">
+                    <i class="fa-solid fa-weight-hanging"></i>
+                    <div>
+                        <span class="stat-title">Ocupação (Peso)</span>
+                        <strong id="stat-weight">0.00%</strong>
+                    </div>
+                </div>
+            </div>
+
+            <div id="capacity-warning" style="display: none; position: absolute; z-index: 10; bottom: 20px; left: 50%; transform: translateX(-50%); background: var(--danger); padding: 12px 20px; border-radius: 8px; color: white; align-items: center; gap: 10px; box-shadow: 0 4px 15px rgba(239,68,68,0.4); font-weight: 500;">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+                <span id="warning-text">O veículo não comporta a carga. Altere para um veículo maior.</span>
+            </div>
+
+            <div id="canvas-container">
+                <div id="empty-state">
+                    <div class="pulse-ring"></div>
+                    <i class="fa-solid fa-cube fa-3x"></i>
+                    <h3>Visualizador 3D</h3>
+                    <p>Adicione cargas e calcule para ver o resultado interativo.</p>
+                </div>
+            </div>
+            
+            <div id="loading-overlay" class="hidden">
+                <div class="spinner"></div>
+                <p>Calculando a melhor disposição...</p>
+            </div>
+        </main>
+    </div>
+
+    <!-- Template de Item Carga -->
+    <template id="cargo-template">
+        <div class="cargo-item">
+            <div class="cargo-header">
+                <input type="text" class="cargo-name input-modern" placeholder="Nome (Ex: Palete A)">
+                <input type="color" class="cargo-color" value="#3498db">
+                <button class="btn-icon btn-remove" title="Remover"><i class="fa-solid fa-trash"></i></button>
+            </div>
+            <div class="cargo-dims grid-2col">
+                <div class="form-group">
+                    <label>Compr. (<span class="unit-text">cm</span>)</label>
+                    <input type="number" class="cargo-l input-modern" min="1" value="100">
+                </div>
+                <div class="form-group">
+                    <label>Largura (<span class="unit-text">cm</span>)</label>
+                    <input type="number" class="cargo-w input-modern" min="1" value="100">
+                </div>
+                <div class="form-group">
+                    <label>Altura (<span class="unit-text">cm</span>)</label>
+                    <input type="number" class="cargo-h input-modern" min="1" value="100">
+                </div>
+                <div class="form-group">
+                    <label>Qtd.</label>
+                    <input type="number" class="cargo-q input-modern" min="1" value="10">
+                </div>
+            </div>
+            <div class="cargo-weight">
+                <div class="form-group">
+                    <label>Peso por Unidade (kg)</label>
+                    <input type="number" class="cargo-weight-val input-modern" min="0" value="50">
+                </div>
+                <div class="form-group checkbox-group">
+                    <label class="check-label">
+                        <input type="checkbox" class="cargo-rotate" checked>
+                        <span>Pode Girar?</span>
+                    </label>
+                </div>
+                <div class="form-group checkbox-group">
+                    <label class="check-label">
+                        <input type="checkbox" class="cargo-stackable" checked>
+                        <span>Empilhável?</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

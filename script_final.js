@@ -30,30 +30,32 @@ const containerPresets = {
 };
 
 // Alternância de Unidades
-if (unitToggle) {
-    unitToggle.addEventListener('change', (e) => {
-        const toMm = e.target.checked;
-        if (toMm && isCm) {
-            isCm = false;
-            lblCm.classList.remove('active');
-            lblMm.classList.add('active');
-            document.querySelectorAll('.unit-text').forEach(el => el.textContent = 'mm');
-            convertAllValues(10);
-        } else if (!toMm && !isCm) {
-            isCm = true;
-            lblMm.classList.remove('active');
-            lblCm.classList.add('active');
-            document.querySelectorAll('.unit-text').forEach(el => el.textContent = 'cm');
-            convertAllValues(0.1);
-        }
-    });
-}
+unitToggle.addEventListener('change', (e) => {
+    const toMm = e.target.checked;
+    if (toMm && isCm) {
+        // Mudar para MM
+        isCm = false;
+        lblCm.classList.remove('active');
+        lblMm.classList.add('active');
+        document.querySelectorAll('.unit-text').forEach(el => el.textContent = 'mm');
+        convertAllValues(10);
+    } else if (!toMm && !isCm) {
+        // Mudar para CM
+        isCm = true;
+        lblMm.classList.remove('active');
+        lblCm.classList.add('active');
+        document.querySelectorAll('.unit-text').forEach(el => el.textContent = 'cm');
+        convertAllValues(0.1);
+    }
+});
 
 function convertAllValues(factor) {
+    // Inputs Container
     contL.value = Math.round(parseFloat(contL.value) * factor);
     contW.value = Math.round(parseFloat(contW.value) * factor);
     contH.value = Math.round(parseFloat(contH.value) * factor);
     
+    // Inputs Cargas
     const items = document.querySelectorAll('.cargo-item');
     items.forEach(item => {
         const l = item.querySelector('.cargo-l');
@@ -79,15 +81,19 @@ vehicleOptions.forEach(opt => {
             containerPresetsWrapper.style.display = 'block';
             vehicleDims.forEach(i => {
                 i.readOnly = true;
-                i.style.opacity = '0.6';
+                i.style.backgroundColor = 'rgba(255,255,255,0.05)';
+                i.style.color = 'var(--text-muted)';
             });
+            // Refletir preset atual
             containerSelect.dispatchEvent(new Event('change'));
         } else {
             containerPresetsWrapper.style.display = 'none';
             vehicleDims.forEach(i => {
                 i.readOnly = false;
-                i.style.opacity = '1';
+                i.style.backgroundColor = '';
+                i.style.color = '';
             });
+            // Resetar para um caminhão padrão
             const multiplier = isCm ? 1 : 10;
             contL.value = 600 * multiplier;
             contW.value = 240 * multiplier;
@@ -99,20 +105,19 @@ vehicleOptions.forEach(opt => {
 });
 
 // Seleção de Preset de Container
-if (containerSelect) {
-    containerSelect.addEventListener('change', (e) => {
-        const preset = containerPresets[e.target.value];
-        if(preset) {
-            const multiplier = isCm ? 1 : 10;
-            contL.value = Math.round(preset.l * multiplier);
-            contW.value = Math.round(preset.w * multiplier);
-            contH.value = Math.round(preset.h * multiplier);
-            contMaxW.value = preset.weight;
-        }
-        liveUpdate();
-    });
-}
+containerSelect.addEventListener('change', (e) => {
+    const preset = containerPresets[e.target.value];
+    if(preset) {
+        const multiplier = isCm ? 1 : 10;
+        contL.value = Math.round(preset.l * multiplier);
+        contW.value = Math.round(preset.w * multiplier);
+        contH.value = Math.round(preset.h * multiplier);
+        contMaxW.value = preset.weight;
+    }
+    liveUpdate();
+});
 
+// Atualização Reativa nas Mudanças Manuais
 vehicleDims.forEach(input => {
     input.addEventListener('input', () => liveUpdate());
 });
@@ -121,35 +126,29 @@ function liveUpdate() {
     clearTimeout(liveUpdate.timeout);
     liveUpdate.timeout = setTimeout(() => {
         try { runPacking(); } catch(e) { console.error(e); }
-    }, 500);
+    }, 300); // debounce pequeno
 }
 
 // Inicializar container inicial
-if (containerSelect) containerSelect.dispatchEvent(new Event('change'));
+containerSelect.dispatchEvent(new Event('change'));
 
 // Adição de Carga
 addCargoBtn.addEventListener('click', () => {
     const template = document.getElementById('cargo-template');
     const clo = template.content.cloneNode(true);
+    
     const cargoItemDiv = clo.querySelector('.cargo-item');
     
+    // Botão de remover
     clo.querySelector('.btn-remove').addEventListener('click', () => {
         cargoItemDiv.remove();
-        liveUpdate();
     });
     
-    const colors = ['#1966ff', '#e1121a', '#10B981', '#F59E0B', '#8B5CF6'];
-    const randomColor = colors[Math.floor(Math.random() * colors.length)];
+    // Cor aleatória
+    const randomColor = '#' + Math.floor(Math.random()*16777215).toString(16).padStart(6, '0');
     clo.querySelector('.cargo-color').value = randomColor;
 
     cargoList.appendChild(clo);
-    
-    // Auto-update on new input
-    cargoItemDiv.querySelectorAll('input').forEach(inp => {
-        inp.addEventListener('input', () => liveUpdate());
-    });
-    
-    liveUpdate();
 });
 
 // Iniciar com uma carga de exemplo
@@ -165,32 +164,39 @@ let boxesMeshes = [];
 
 function init3D() {
     const container = document.getElementById('canvas-container');
-    if (!container) return;
     
     scene = new THREE.Scene();
     
+    // Câmera
     camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 1, 10000);
-    camera.position.set(1200, 1000, 1200);
+    camera.position.set(2000, 2000, 2000);
     
     renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
     renderer.setSize(container.clientWidth, container.clientHeight);
     renderer.setPixelRatio(window.devicePixelRatio);
     
+    // Limpar estado inicial
     const emptyState = document.getElementById('empty-state');
     if (emptyState) emptyState.style.display = 'none';
     
     container.appendChild(renderer.domElement);
     
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
+    // Luzes
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
     scene.add(ambientLight);
     
-    const dirLight = new THREE.DirectionalLight(0xffffff, 0.5);
+    const dirLight = new THREE.DirectionalLight(0xffffff, 0.6);
     dirLight.position.set(1000, 2000, 1000);
     scene.add(dirLight);
 
+    // Controles
     controls = new THREE.OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true;
     controls.dampingFactor = 0.05;
+    
+    // Eixos para referência
+    const axesHelper = new THREE.AxesHelper(1000);
+    scene.add(axesHelper);
     
     animate();
 }
@@ -201,9 +207,10 @@ function animate() {
     if(renderer && scene && camera) renderer.render(scene, camera);
 }
 
+// Quando a janela for redimensionada
 window.addEventListener('resize', () => {
     const container = document.getElementById('canvas-container');
-    if(camera && renderer && container) {
+    if(camera && renderer) {
         camera.aspect = container.clientWidth / container.clientHeight;
         camera.updateProjectionMatrix();
         renderer.setSize(container.clientWidth, container.clientHeight);
@@ -211,17 +218,17 @@ window.addEventListener('resize', () => {
 });
 
 calculateBtn.addEventListener('click', () => {
-    const overlay = document.getElementById('loading-overlay');
-    overlay.classList.remove('hidden');
+    document.getElementById('loading-overlay').classList.remove('hidden');
     
     setTimeout(() => {
         try {
             runPacking();
         } catch(e) {
             console.error(e);
+            alert("Erro ao calcular: " + e.message);
         }
-        overlay.classList.add('hidden');
-    }, 600);
+        document.getElementById('loading-overlay').classList.add('hidden');
+    }, 100);
 });
 
 function getVal(val) {
@@ -229,6 +236,7 @@ function getVal(val) {
     return isNaN(v) ? 0 : v;
 }
 
+// Algoritmo Guildotine 3D Heurístico Simplificado
 class Space {
     constructor(x, y, z, w, h, d) {
         this.x = x; this.y = y; this.z = z;
@@ -237,14 +245,16 @@ class Space {
 }
 
 function runPacking() {
+    // 1. Coletar dados do Container (Converter para CM para o cálculo interno, facilita)
     const factorToCm = isCm ? 1 : 0.1;
     const cW = getVal(contW.value) * factorToCm;
     const cH = getVal(contH.value) * factorToCm;
-    const cD = getVal(contL.value) * factorToCm; 
+    const cD = getVal(contL.value) * factorToCm; // L = depth
     const maxWeight = getVal(contMaxW.value);
     
-    if(cW === 0 || cH === 0 || cD === 0) return;
+    if(cW === 0 || cH === 0 || cD === 0) return alert("Dimensões do container inválidas.");
 
+    // 2. Coletar Cargas
     let itemsToPack = [];
     let boxesCount = 0;
     
@@ -260,6 +270,7 @@ function runPacking() {
         const color = node.querySelector('.cargo-color').value;
         
         boxesCount += q;
+        
         for(let i=0; i<q; i++) {
             itemsToPack.push({
                 id: Math.random().toString(),
@@ -268,30 +279,42 @@ function runPacking() {
         }
     });
     
-    if(itemsToPack.length === 0) return;
+    if(itemsToPack.length === 0) return alert("Adicione pelo menos uma carga.");
 
+    // Ordenar itens do maior volume para o menor
     itemsToPack.sort((a,b) => b.volume - a.volume);
 
     let freeSpaces = [new Space(0,0,0, cW, cH, cD)];
     let packedItems = [];
     let currentWeight = 0;
+    
+    // Contadores de falha
     let failedWeightCount = 0;
     let failedSpaceCount = 0;
 
+    // Empacotamento
     for(const item of itemsToPack) {
         if(currentWeight + item.weight > maxWeight) {
+            // Peso excedido, pula o item
             failedWeightCount++;
             continue; 
         }
 
+        // Tentar encontrar um espaço
         let bestSpaceIndex = -1;
         let finalW, finalH, finalD;
         
+        // Gerar rotações permitidas
+        // A pedido do usuário: girar apenas no eixo Y (largura x comprimento). NUNCA deitar ou virar de ponta cabeça.
         let rotations = [ [item.w, item.h, item.d] ];
-        if(item.rotate) rotations.push([item.d, item.h, item.w]);
+        if(item.rotate) {
+            rotations.push([item.d, item.h, item.w]);
+        }
 
+        // Achar o espaço mais embaixo e mais no fundo possível (Min Y, Min Z, Min X)
         for(let i = 0; i < freeSpaces.length; i++) {
             let space = freeSpaces[i];
+            
             for(let rot of rotations) {
                 let [rw, rh, rd] = rot;
                 if(rw <= space.w && rh <= space.h && rd <= space.d) {
@@ -299,6 +322,7 @@ function runPacking() {
                         bestSpaceIndex = i;
                         finalW = rw; finalH = rh; finalD = rd;
                     } else {
+                        // Comparar com o best anterior para pegar o melhor (heuristic)
                         let bestSpace = freeSpaces[bestSpaceIndex];
                         if(space.y < bestSpace.y || (space.y === bestSpace.y && space.z < bestSpace.z)) {
                             bestSpaceIndex = i;
@@ -311,14 +335,34 @@ function runPacking() {
 
         if(bestSpaceIndex !== -1) {
             let space = freeSpaces.splice(bestSpaceIndex, 1)[0];
+            
+            // Empacotar
             packedItems.push({
-                ...item, x: space.x, y: space.y, z: space.z, w: finalW, h: finalH, d: finalD
+                ...item,
+                x: space.x,
+                y: space.y,
+                z: space.z,
+                w: finalW,
+                h: finalH,
+                d: finalD
             });
             currentWeight += item.weight;
 
-            if(space.h - finalH > 0) freeSpaces.push(new Space(space.x, space.y + finalH, space.z, finalW, space.h - finalH, finalD));
-            if(space.w - finalW > 0) freeSpaces.push(new Space(space.x + finalW, space.y, space.z, space.w - finalW, space.h, finalD));
-            if(space.d - finalD > 0) freeSpaces.push(new Space(space.x, space.y, space.z + finalD, space.w, space.h, space.d - finalD));
+            // Split do espaço restante (Cria 3 novos espaços em volta da caixa inserida)
+            // 1. Espaço Acima (Top)
+            if(space.h - finalH > 0) {
+                freeSpaces.push(new Space(space.x, space.y + finalH, space.z, finalW, space.h - finalH, finalD));
+            }
+            // 2. Espaço ao Lado (Right)
+            if(space.w - finalW > 0) {
+                freeSpaces.push(new Space(space.x + finalW, space.y, space.z, space.w - finalW, space.h, finalD));
+            }
+            // 3. Espaço a Frente (Front)
+            if(space.d - finalD > 0) {
+                freeSpaces.push(new Space(space.x, space.y, space.z + finalD, space.w, space.h, space.d - finalD));
+            }
+            
+            // Opcional: Consolidação de espaços vazios seria ideal, mas pra MVP tá ok.
         } else {
             failedSpaceCount++;
         }
@@ -327,14 +371,24 @@ function runPacking() {
     render3D(cW, cH, cD, packedItems);
     updateStats(boxesCount, packedItems.length, cW*cH*cD, packedItems, currentWeight, maxWeight);
     
+    // Banner de Aviso: Por que não coube?
     const warningBox = document.getElementById('capacity-warning');
     const warningMsg = document.getElementById('warning-text');
     
     if (failedWeightCount > 0 || failedSpaceCount > 0) {
         warningBox.style.display = 'flex';
         const failCount = failedWeightCount + failedSpaceCount;
-        let reason = (failedWeightCount > 0 && failedSpaceCount > 0) ? "por limite de peso e falta de espaço" : (failedWeightCount > 0 ? "por limite de peso" : "por falta de espaço físico");
-        warningMsg.textContent = `Atenção: ${failCount} item(s) não couberam ${reason}.`;
+        
+        let reason = "";
+        if(failedWeightCount > 0 && failedSpaceCount > 0) {
+            reason = "por limite de peso excedido e por falta de espaço físico no veículo";
+        } else if (failedWeightCount > 0) {
+            reason = "por limite de peso excedido";
+        } else {
+            reason = "por falta de espaço físico no veículo";
+        }
+        
+        warningMsg.textContent = `Atenção: ${failCount} item(s) não couberam ${reason}. Tente um veículo maior ou ajuste as cargas.`;
     } else {
         warningBox.style.display = 'none';
     }
@@ -342,10 +396,12 @@ function runPacking() {
 
 function updateStats(totalBoxes, packedBoxes, totalVol, packedItems, currentWeight, maxWeight) {
     document.getElementById('stat-count').textContent = `${packedBoxes} / ${totalBoxes}`;
+    
     let usedVol = 0;
     packedItems.forEach(i => usedVol += (i.w * i.h * i.d));
     let volPercent = totalVol > 0 ? (usedVol / totalVol) * 100 : 0;
     document.getElementById('stat-vol').textContent = volPercent.toFixed(2) + '%';
+    
     let wPercent = maxWeight > 0 ? (currentWeight / maxWeight) * 100 : 0;
     document.getElementById('stat-weight').textContent = wPercent.toFixed(2) + '%';
 }
@@ -353,32 +409,60 @@ function updateStats(totalBoxes, packedBoxes, totalVol, packedItems, currentWeig
 function render3D(cW, cH, cD, packedItems) {
     if(!scene) init3D();
     
+    // Limpar meshes antigas
     if(containerMesh) scene.remove(containerMesh);
     boxesMeshes.forEach(mesh => scene.remove(mesh));
     boxesMeshes = [];
 
+    // O Three.js posiciona pelo centro. Para alinhar como a nossa lógia (x,y,z da ponta), vamos criar um Offset.
     const ox = -cW/2;
     const oy = -cH/2;
     const oz = -cD/2;
 
+    // Criar Container Wrapper
     const contGeo = new THREE.BoxGeometry(cW, cH, cD);
-    const contMat = new THREE.MeshBasicMaterial({ color: 0x1966ff, transparent: true, opacity: 0.1, depthWrite: false });
+    const contMat = new THREE.MeshBasicMaterial({ 
+        color: 0x3B82F6, 
+        wireframe: false, 
+        transparent: true, 
+        opacity: 0.1,
+        depthWrite: false
+    });
     containerMesh = new THREE.Mesh(contGeo, contMat);
+    // Adicionar bordas marcadas
     const edges = new THREE.EdgesGeometry(contGeo);
-    const line = new THREE.LineSegments(edges, new THREE.LineBasicMaterial({ color: 0x1966ff, opacity: 0.5, transparent: true }));
+    const line = new THREE.LineSegments(edges, new THREE.LineBasicMaterial({ color: 0x3B82F6, linewidth: 2 }));
     containerMesh.add(line);
+    
+    // Centralizar
+    containerMesh.position.set(0, 0, 0);
     scene.add(containerMesh);
 
+    // Adicionar Caixas
     packedItems.forEach(item => {
         const geo = new THREE.BoxGeometry(item.w, item.h, item.d);
+        
+        // Criar bordas finas para distinguir caixas da mesma cor
         const bEdges = new THREE.EdgesGeometry(geo);
-        const bLine = new THREE.LineSegments(bEdges, new THREE.LineBasicMaterial({ color: 0x000000, transparent: true, opacity: 0.3 }));
+        const bLine = new THREE.LineSegments(bEdges, new THREE.LineBasicMaterial({ color: 0x000000, linewidth: 1, transparent: true, opacity: 0.5 }));
 
         const mat = new THREE.MeshLambertMaterial({ color: item.color });
         const mesh = new THREE.Mesh(geo, mat);
-        mesh.position.set(ox + item.x + item.w/2, oy + item.y + item.h/2, oz + item.z + item.d/2);
+        
+        // Offset baseado no (x,y,z) que é bottom-left-back no nosso box algorithm
+        mesh.position.set(
+            ox + item.x + item.w/2,
+            oy + item.y + item.h/2,
+            oz + item.z + item.d/2
+        );
+        
         mesh.add(bLine);
         scene.add(mesh);
         boxesMeshes.push(mesh);
     });
+
+    // Ajustar Câmera
+    const maxDim = Math.max(cW, cH, cD);
+    camera.position.set(maxDim*1.2, maxDim*0.8, maxDim*1.2);
+    controls.target.set(0, 0, 0);
 }
