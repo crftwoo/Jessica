@@ -1,1 +1,1 @@
-Fix: remove scroll horizontal da seção serviços e ajusta altura do hero para corrigir gap escuro.
+Fix: organiza e centraliza título de valores trocando hifens por bullets sutis usando flexbox.
