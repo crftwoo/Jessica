@@ -1762,26 +1762,27 @@
                     });
                 });
 
-                gsap.utils.toArray("[data-count]").forEach((el) => {
-                    const target = Number(el.dataset.count || 0);
-                    const obj = { value: 0 };
-                    ScrollTrigger.create({
-                        trigger: el,
-                        start: "top 85%",
-                        once: true,
-                        onEnter: () => {
+                const counterObserver = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const el = entry.target;
+                            const target = Number(el.dataset.count || 0);
+                            const obj = { value: 0 };
                             gsap.to(obj, {
                                 value: target,
-                                duration: 2.2,
+                                duration: 2.5,
                                 ease: "power3.out",
                                 onUpdate: () => {
                                     const value = Math.round(obj.value);
                                     el.textContent = el.dataset.format === "milhar" ? value.toLocaleString("pt-BR") : value;
                                 }
                             });
+                            observer.unobserve(el);
                         }
                     });
-                });
+                }, { threshold: 0.5 }); // Exige que 50% do número esteja visível na tela
+
+                document.querySelectorAll("[data-count]").forEach(el => counterObserver.observe(el));
 
                 initGlobe3D(gsap, ScrollTrigger);
 
