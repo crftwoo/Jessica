@@ -4,12 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#0A0A0A">
-    <title>Stadler Logística | Qualidade em Transporte e Logística</title>
-    <meta name="description" content="Fundada em 2010, a STADLER atualmente presta serviços de Transporte Rodoviário de Cargas Nacional, Transportador Aduaneiro (DTA), Operador Logístico e Armazenagem.">
+    <title>Stadler Logística | Transporte, Armazenagem e Comércio Exterior no PR e SC</title>
+    <meta name="description" content="Soluções completas em transporte rodoviário, DTA, armazenagem, supply chain e operações logísticas para cargas nacionais, internacionais e comércio exterior no Paraná e Santa Catarina.">
+    <meta name="keywords" content="transporte rodoviário, transporte aduaneiro, DTA, armazenagem, operador logístico, comércio exterior, supply chain, logística Paraná, logística Santa Catarina, Piraquara, Itajaí, São José dos Pinhais">
+    <meta name="author" content="Stadler Logística">
     <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://crftwoo.github.io/Jessica/index_Codex.html">
+    <link rel="canonical" href="https://crftwoo.github.io/Jessica/">
     <link rel="icon" type="image/webp" href="assets/stadler-s-dark.webp">
     <link rel="alternate" type="text/plain" href="llm.txt">
+
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:title" content="Stadler Logística | Transporte, Armazenagem e Comércio Exterior">
+    <meta property="og:description" content="Soluções completas em transporte rodoviário, DTA, armazenagem, supply chain e operações logísticas no Paraná e Santa Catarina.">
+    <meta property="og:url" content="https://crftwoo.github.io/Jessica/">
+    <meta property="og:site_name" content="Stadler Logística">
+    <meta property="og:image" content="https://crftwoo.github.io/Jessica/assets/stadler-logo-official-blue.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Stadler Logística | Transporte, Armazenagem e Comércio Exterior">
+    <meta name="twitter:description" content="Soluções completas em transporte rodoviário, DTA, armazenagem, supply chain e operações logísticas no Paraná e Santa Catarina.">
+    <meta name="twitter:image" content="https://crftwoo.github.io/Jessica/assets/stadler-logo-official-blue.png">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -283,6 +297,113 @@
 
         .nav a:not(.cta):hover::after {
             right: 0;
+        }
+
+        .nav-divider {
+            width: 1px;
+            height: 18px;
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .nav-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            color: rgba(255, 255, 255, 0.7);
+            border-radius: 8px;
+            transition: color 200ms ease, background 200ms ease;
+        }
+
+        .nav-icon:hover {
+            color: var(--text);
+            background: rgba(255, 255, 255, 0.06);
+        }
+
+        .nav-icon i {
+            width: 16px;
+            height: 16px;
+        }
+
+        .nav-icon::after {
+            display: none !important;
+        }
+
+        .mobile-contacts {
+            display: flex;
+            gap: 18px;
+            justify-content: center;
+            padding-top: 28px;
+            border-top: 1px solid rgba(255, 255, 255, 0.12);
+        }
+
+        .mobile-contacts a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 52px;
+            height: 52px;
+            color: rgba(255, 255, 255, 0.86);
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .mobile-contacts a i {
+            width: 20px;
+            height: 20px;
+        }
+
+        .whatsapp-float {
+            position: fixed;
+            right: 22px;
+            bottom: 22px;
+            z-index: 130;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 16px;
+            color: #ffffff;
+            background: #25D366;
+            border-radius: 999px;
+            box-shadow: 0 16px 40px rgba(37, 211, 102, 0.32), 0 0 0 1px rgba(255, 255, 255, 0.18) inset;
+            transition: transform 220ms cubic-bezier(.22,1,.36,1), box-shadow 220ms ease;
+        }
+
+        .whatsapp-float:hover {
+            transform: translateY(-2px) scale(1.03);
+            box-shadow: 0 20px 50px rgba(37, 211, 102, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.24) inset;
+        }
+
+        .whatsapp-float i {
+            width: 22px;
+            height: 22px;
+        }
+
+        .whatsapp-float__label {
+            font-family: "JetBrains Mono", ui-monospace, monospace;
+            font-size: 0.74rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        @media (max-width: 760px) {
+            .whatsapp-float {
+                right: 16px;
+                bottom: 16px;
+                padding: 12px;
+            }
+            .whatsapp-float__label {
+                display: none;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .whatsapp-float:hover {
+                transform: none;
+            }
         }
 
         .menu-toggle {
@@ -560,12 +681,29 @@
             58% { opacity: .38; transform: translate(8px, -1px); }
         }
 
+        .hero-pitch {
+            max-width: 920px;
+            margin: 0;
+            color: rgba(255, 255, 255, 0.94);
+            font-size: clamp(1.3rem, 2.6vw, 2.1rem);
+            line-height: 1.18;
+            font-weight: 700;
+            text-wrap: balance;
+        }
+
         .hero-copy {
-            max-width: 720px;
+            max-width: 760px;
             margin: 0;
             color: rgba(255, 255, 255, 0.78);
-            font-size: clamp(1.06rem, 2vw, 1.58rem);
-            line-height: 1.48;
+            font-size: clamp(1.02rem, 1.8vw, 1.42rem);
+            line-height: 1.5;
+        }
+
+        .hero-actions .button {
+            text-transform: none;
+            letter-spacing: 0.02em;
+            font-size: 0.78rem;
+            padding: 0 24px;
         }
 
         .hero-actions {
@@ -801,6 +939,67 @@
             margin: 0;
             color: rgba(255, 255, 255, 0.66);
             line-height: 1.7;
+        }
+
+        .trust-strip {
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            background:
+                linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.015)),
+                rgba(10, 10, 10, 0.6);
+            backdrop-filter: blur(8px);
+        }
+
+        .trust-list {
+            margin: 0;
+            padding: 22px 0;
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(5, minmax(0, 1fr));
+            gap: 16px 24px;
+            align-items: center;
+        }
+
+        .trust-list li {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            color: rgba(255, 255, 255, 0.78);
+            font-family: "JetBrains Mono", ui-monospace, monospace;
+            font-size: 0.74rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+
+        .trust-list li i {
+            width: 18px;
+            height: 18px;
+            color: var(--red);
+            flex: 0 0 18px;
+            filter: drop-shadow(0 0 8px rgba(225, 18, 26, 0.6));
+        }
+
+        @media (max-width: 1100px) {
+            .trust-list {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                padding: 18px 0;
+            }
+            .trust-list li:last-child {
+                grid-column: span 2;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .trust-list {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+            .trust-list li:last-child {
+                grid-column: auto;
+                justify-content: flex-start;
+            }
         }
 
         .horizontal-section {
@@ -1343,7 +1542,11 @@
                 <a href="#seguranca">Segurança e Seguro</a>
                 <a href="calculadora.html">Simulador de Carga</a>
                 <a href="#contato">Unidades e Contatos</a>
-                <a class="cta magnetic" data-glow href="#contato">SOLICITAR ORÇAMENTO</a>
+                <span class="nav-divider" aria-hidden="true"></span>
+                <a class="nav-icon" id="navPhone" href="tel:+554132184838" aria-label="Ligar para Stadler Logística"><i data-lucide="phone"></i></a>
+                <a class="nav-icon" id="navEmail" href="#" aria-label="Enviar e-mail"><i data-lucide="mail"></i></a>
+                <a class="nav-icon" id="navWhats" href="#" aria-label="Falar pelo WhatsApp" target="_blank" rel="noopener"><i data-lucide="message-circle"></i></a>
+                <a class="cta magnetic" data-glow href="#contato">Solicitar Cotação</a>
             </nav>
             <button class="menu-toggle" id="menuToggle" type="button" aria-label="Abrir menu">
                 <i data-lucide="menu"></i>
@@ -1359,11 +1562,21 @@
             <a href="#sobre">Sobre a Empresa</a>
             <a href="#servicos">Serviços Detalhados</a>
             <a href="#seguranca">Segurança e Seguro</a>
-            <a href="calculadora_Supremo.html">Simulador de Carga</a>
+            <a href="calculadora.html">Simulador de Carga</a>
             <a href="#contato">Unidades e Contatos</a>
-            <a href="#contato">SOLICITAR ORÇAMENTO</a>
+            <a href="#contato">Solicitar Cotação</a>
+            <div class="mobile-contacts">
+                <a href="tel:+554132184838" aria-label="Ligar"><i data-lucide="phone"></i></a>
+                <a id="navEmailMobile" href="#" aria-label="E-mail"><i data-lucide="mail"></i></a>
+                <a id="navWhatsMobile" href="#" target="_blank" rel="noopener" aria-label="WhatsApp"><i data-lucide="message-circle"></i></a>
+            </div>
         </div>
     </div>
+
+    <a class="whatsapp-float" id="whatsappFloat" href="#" target="_blank" rel="noopener" aria-label="Falar pelo WhatsApp">
+        <i data-lucide="message-circle" aria-hidden="true"></i>
+        <span class="whatsapp-float__label">WhatsApp</span>
+    </a>
 
     <main>
         <section class="hero" id="hero">
@@ -1373,14 +1586,27 @@
                 <div class="hero-grid"></div>
                 <div class="hero-overlay"></div>
                 <div class="hero-content">
-                    <span class="hero-kicker">Qualidade em Transporte e Logística.</span>
+                    <span class="hero-kicker">Logística & Comércio Exterior — PR e SC</span>
                     <h1><span class="glitch" data-text="STADLER">STADLER</span><br>LOGÍSTICA</h1>
-                    <p class="hero-copy">Desde 2010 superando as expectativas de nossos clientes.</p>
+                    <p class="hero-pitch">Transporte, armazenagem e logística para cargas nacionais, internacionais e comércio exterior</p>
+                    <p class="hero-copy">Soluções completas em transporte rodoviário, DTA, armazenagem, supply chain e operações logísticas no Paraná e Santa Catarina.</p>
                     <div class="hero-actions">
-                        <a class="button magnetic" data-glow href="#contato">SOLICITAR ORÇAMENTO</a>
-                        <a class="button secondary magnetic" data-glow href="#servicos">SERVIÇOS DETALHADOS</a>
+                        <a class="button magnetic" data-glow href="#contato">Falar com um Especialista em Logística</a>
+                        <a class="button secondary magnetic" data-glow href="#contato">Solicitar Cotação</a>
                     </div>
                 </div>
+            </div>
+        </section>
+
+        <section class="trust-strip" aria-label="Diferenciais de confiança">
+            <div class="shell">
+                <ul class="trust-list">
+                    <li><i data-lucide="shield-check" aria-hidden="true"></i><span>Seguro de carga</span></li>
+                    <li><i data-lucide="file-check-2" aria-hidden="true"></i><span>Transporte DTA</span></li>
+                    <li><i data-lucide="shield" aria-hidden="true"></i><span>Segurança 24h</span></li>
+                    <li><i data-lucide="map-pin" aria-hidden="true"></i><span>Rastreamento e monitoramento</span></li>
+                    <li><i data-lucide="globe-2" aria-hidden="true"></i><span>Atuação no PR e SC</span></li>
+                </ul>
             </div>
         </section>
 
@@ -1666,8 +1892,48 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
     <script src="https://unpkg.com/lucide@latest" defer></script>
+    <script>
+        // Fallback dos contadores: se o GSAP não carregar em 4.5s, escreve os valores finais.
+        // Só atualiza elementos que ainda mostram "0" — não interfere com a animação real.
+        setTimeout(function () {
+            if (window.gsap) return;
+            document.querySelectorAll("[data-count]").forEach(function (el) {
+                var current = (el.textContent || "").trim();
+                if (current === "" || current === "0") {
+                    el.textContent = el.dataset.count || "0";
+                }
+            });
+        }, 4500);
+    </script>
     <script type="module">
         import * as THREE from "https://unpkg.com/three@0.161.0/build/three.module.js";
+
+        // ============================================================
+        // CONFIGURAÇÕES DE CONTATO — alterar aqui quando os números reais estiverem disponíveis.
+        //   WHATSAPP_NUMBER: somente dígitos, formato internacional (DDI+DDD+número).
+        //   CONTACT_EMAIL  : e-mail principal exibido nos links rápidos.
+        //   CONTACT_PHONE  : telefone principal (formato livre).
+        // ============================================================
+        const WHATSAPP_NUMBER = "55XXXXXXXXXXX";
+        const CONTACT_EMAIL = "contato@stadlerlog.com.br";
+        const CONTACT_PHONE = "+55 41 3218-4838";
+        const WHATSAPP_DEFAULT_MSG = "Olá! Gostaria de falar com um especialista em logística da Stadler.";
+
+        const buildWhatsAppLink = (msg) => {
+            const number = (WHATSAPP_NUMBER || "").replace(/\D/g, "");
+            const text = encodeURIComponent(msg || WHATSAPP_DEFAULT_MSG);
+            return `https://wa.me/${number}?text=${text}`;
+        };
+
+        const applyContactLinks = () => {
+            const wa = buildWhatsAppLink();
+            document.querySelectorAll("#whatsappFloat, #navWhats, #navWhatsMobile").forEach((el) => {
+                el.setAttribute("href", wa);
+            });
+            document.querySelectorAll("#navEmail, #navEmailMobile").forEach((el) => {
+                el.setAttribute("href", `mailto:${CONTACT_EMAIL}`);
+            });
+        };
 
         const ready = (fn) => {
             if (document.readyState === "loading") {
@@ -1676,6 +1942,9 @@
                 fn();
             }
         };
+
+        // Aplica os links assim que o DOM estiver disponível, independente do GSAP.
+        ready(applyContactLinks);
 
         ready(() => {
             const waitForGsap = () => new Promise((resolve) => {
@@ -1772,7 +2041,7 @@
                             const obj = { value: 0 };
                             gsap.to(obj, {
                                 value: target,
-                                duration: 2.5,
+                                duration: 1.8,
                                 ease: "power3.out",
                                 onUpdate: () => {
                                     const value = Math.round(obj.value);
@@ -1782,7 +2051,7 @@
                             observer.unobserve(el);
                         }
                     });
-                }, { threshold: 0.5 }); // Exige que 50% do número esteja visível na tela
+                }, { threshold: 0.2, rootMargin: "0px 0px -10% 0px" });
 
                 document.querySelectorAll("[data-count]").forEach(el => counterObserver.observe(el));
 
