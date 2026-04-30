@@ -2207,7 +2207,7 @@
             const scene = new THREE.Scene();
             scene.fog = new THREE.FogExp2(0x0a0a0a, 0.05);
 
-            const camera = new THREE.PerspectiveCamera(38, mount.clientWidth / mount.clientHeight, 0.1, 100);
+            const camera = new THREE.PerspectiveCamera(46, mount.clientWidth / mount.clientHeight, 0.1, 100);
             camera.position.set(6.8, 3.2, 8.6);
 
             const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: "high-performance" });
@@ -2222,6 +2222,7 @@
             const group = new THREE.Group();
             group.position.set(1.65, -0.1, 0);
             group.rotation.set(-0.06, -0.72, 0.03);
+            group.scale.set(0.8, 0.8, 0.8);
             scene.add(group);
 
             const parts = [];

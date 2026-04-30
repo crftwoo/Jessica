@@ -1,1 +1,1 @@
-Fix: organiza e centraliza título de valores trocando hifens por bullets sutis usando flexbox.
+Fix: reduz container 3D do hero em ~20% via scale 0.8 e FOV ajustado de 38 para 46.
