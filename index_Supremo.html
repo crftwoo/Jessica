@@ -945,42 +945,43 @@
 
         .map-node {
             position: absolute;
-            width: 14px;
-            height: 14px;
+            width: 8px;
+            height: 8px;
             background: #fff;
             border-radius: 50%;
             transform: translate(-50%, -50%);
-            box-shadow: 0 0 16px #fff, 0 0 32px var(--blue-hot);
+            box-shadow: 0 0 10px #fff, 0 0 20px var(--blue-hot);
             cursor: pointer;
             z-index: 10;
         }
 
         .node-pulse {
             position: absolute;
-            inset: -14px;
+            inset: -4px;
             border-radius: 50%;
-            border: 2px solid var(--blue-hot);
-            animation: mapPing 2.5s cubic-bezier(0, 0, 0.2, 1) infinite;
+            border: 1px solid rgba(25, 102, 255, 0.6);
+            animation: mapPing 3s cubic-bezier(0, 0, 0.2, 1) infinite;
         }
 
-        .map-node.delay-1 .node-pulse { animation-delay: 0.8s; }
-        .map-node.delay-2 .node-pulse { animation-delay: 1.6s; }
+        .map-node.delay-1 .node-pulse { animation-delay: 1s; }
+        .map-node.delay-2 .node-pulse { animation-delay: 2s; }
 
         @keyframes mapPing {
-            75%, 100% { transform: scale(3); opacity: 0; }
+            0% { transform: scale(0.8); opacity: 1; }
+            100% { transform: scale(2.8); opacity: 0; }
         }
 
         .node-label {
             position: absolute;
-            left: 24px;
+            left: 16px;
             top: 50%;
             transform: translateY(-50%);
             background: rgba(10, 10, 10, 0.86);
             border: 1px solid rgba(25, 102, 255, 0.4);
-            padding: 6px 12px;
+            padding: 4px 10px;
             border-radius: 6px;
             color: #fff;
-            font-size: 0.75rem;
+            font-size: 0.65rem;
             font-weight: 800;
             white-space: nowrap;
             pointer-events: none;
@@ -993,8 +994,21 @@
         }
 
         @media (max-width: 900px) {
-            .network-layout { grid-template-columns: 1fr; }
-            .brazil-map-container { display: none; /* Map hidden on very small screens to save space */ }
+            .network-layout { 
+                grid-template-columns: 1fr; 
+                gap: 40px; 
+            }
+            .brazil-map-container { 
+                display: block; 
+                max-width: 280px; 
+                margin: 0 auto 20px; 
+                opacity: 0.85; 
+            }
+            .node-label {
+                font-size: 0.6rem;
+                padding: 3px 6px;
+                left: 12px;
+            }
         }
 
         .addresses {
