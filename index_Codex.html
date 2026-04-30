@@ -15,7 +15,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
     <link rel="preconnect" href="https://unpkg.com">
-    <link rel="preload" as="image" href="assets/stadler-s-dark.webp" fetchpriority="high">
+    <link rel="preload" as="image" href="assets/stadler-logo-official-white.png" fetchpriority="high">
+    <link rel="preload" as="image" href="assets/stadler-s-dark.webp">
     <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <script>
@@ -75,7 +76,7 @@
         "@type": "Organization",
         "name": "Stadler Logística",
         "url": "https://www.stadlerlog.com.br/",
-        "logo": "https://crftwoo.github.io/Jessica/assets/stadler-s-dark.webp",
+        "logo": "https://crftwoo.github.io/Jessica/assets/stadler-logo-official-blue.png",
         "slogan": "Qualidade em Transporte e Logística.",
         "description": "Fundada em 2010, a STADLER atualmente presta serviços de Transporte Rodoviário de Cargas Nacional, Transportador Aduaneiro (DTA), Operador Logístico e Armazenagem. Nossa especialidade são as mercadorias do comércio exterior advindas de portos e aeroportos dos estados do Paraná e Santa Catarina.",
         "telephone": "+55 41 3218-4838",
@@ -243,24 +244,11 @@
             filter: drop-shadow(0 0 18px rgba(25, 102, 255, 0.18));
         }
 
-        .brand-type {
-            display: grid;
-            gap: 1px;
-            color: #fff;
-            line-height: 0.86;
-            text-transform: uppercase;
-        }
-
-        .brand-type strong {
-            font-size: 1.05rem;
-            font-weight: 800;
-        }
-
-        .brand-type span {
-            color: rgba(255, 255, 255, 0.62);
-            font-family: "JetBrains Mono", ui-monospace, monospace;
-            font-size: 0.58rem;
-            font-weight: 700;
+        .brand-full {
+            width: min(220px, 42vw);
+            height: auto;
+            object-fit: contain;
+            filter: drop-shadow(0 0 22px rgba(25, 102, 255, 0.18));
         }
 
         .nav {
@@ -459,31 +447,10 @@
             text-align: center;
         }
 
-        .about-emblem img {
-            width: min(230px, 56%);
+        .about-emblem .official-logo {
+            width: min(680px, 96%);
             margin: 0 auto 20px;
             filter: drop-shadow(0 0 48px rgba(25, 102, 255, 0.2));
-        }
-
-        .about-emblem strong,
-        .footer-brand strong {
-            display: block;
-            color: #fff;
-            font-size: clamp(2rem, 5vw, 4.8rem);
-            line-height: 0.86;
-            font-weight: 800;
-            text-transform: uppercase;
-        }
-
-        .about-emblem span,
-        .footer-brand span {
-            display: block;
-            margin-top: 10px;
-            color: rgba(255, 255, 255, 0.62);
-            font-family: "JetBrains Mono", ui-monospace, monospace;
-            font-size: 0.78rem;
-            font-weight: 700;
-            text-transform: uppercase;
         }
 
         .hero-overlay {
@@ -934,7 +901,7 @@
             z-index: 3;
             background:
                 linear-gradient(135deg, rgba(10, 10, 10, 0.94), rgba(14, 24, 50, 0.94)),
-                url("assets/stadler-s-dark.webp") center/auto 76% no-repeat;
+                url("assets/stadler-logo-official-white.png") center/82% auto no-repeat;
             border: 1px solid rgba(255, 255, 255, 0.16);
             box-shadow: 0 28px 90px rgba(0, 0, 0, 0.52);
             overflow: hidden;
@@ -1083,16 +1050,12 @@
         }
 
         .footer-brand {
-            display: grid;
-            grid-template-columns: 92px 1fr;
-            gap: 18px;
-            align-items: center;
             margin-bottom: 22px;
         }
 
-        .footer-brand img {
-            width: 92px;
-            height: 92px;
+        .footer-logo {
+            width: min(340px, 100%);
+            height: auto;
             object-fit: contain;
         }
 
@@ -1226,12 +1189,8 @@
                 --container: min(100vw - 28px, 1180px);
             }
 
-            .brand-type strong {
-                font-size: 0.94rem;
-            }
-
-            .brand-type span {
-                font-size: 0.52rem;
+            .brand-full {
+                width: min(182px, 54vw);
             }
 
             .brand-mark {
@@ -1336,8 +1295,7 @@
     <header class="header" id="header">
         <div class="header-row">
             <a href="#hero" class="brand" aria-label="Stadler Logística">
-                <img class="brand-mark" src="assets/stadler-s-dark.webp" width="42" height="42" alt="">
-                <span class="brand-type" aria-hidden="true"><strong>STADLER</strong><span>LOGÍSTICA</span></span>
+                <img class="brand-full" src="assets/stadler-logo-official-white.png" width="1200" height="316" alt="Stadler Logística">
             </a>
             <nav class="nav" aria-label="Navegação principal">
                 <a href="#sobre">Sobre a Empresa</a>
@@ -1398,9 +1356,7 @@
                     </div>
                     <div class="glass-panel reveal about-emblem">
                         <div>
-                            <img src="assets/stadler-s-dark.webp" alt="Stadler Logística" width="220" height="220" loading="lazy">
-                            <strong>STADLER</strong>
-                            <span>LOGÍSTICA</span>
+                            <img class="official-logo" src="assets/stadler-logo-official-white.png" alt="Stadler Logística" width="1200" height="316" loading="lazy">
                         </div>
                     </div>
                 </div>
@@ -1654,8 +1610,7 @@
         <div class="shell footer-grid">
             <div>
                 <div class="footer-brand">
-                    <img src="assets/stadler-s-dark.webp" width="92" height="92" alt="Stadler Logística" loading="lazy">
-                    <div aria-hidden="true"><strong>STADLER</strong><span>LOGÍSTICA</span></div>
+                    <img class="footer-logo" src="assets/stadler-logo-official-white.png" width="1200" height="316" alt="Stadler Logística" loading="lazy">
                 </div>
                 <p class="bio">Soluções logísticas, desde 2010 conectando negócios. Segurança, agilidade e confiança.</p>
                 <p style="margin-top:18px">Qualidade em Transporte e Logística.</p>
