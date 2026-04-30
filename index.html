@@ -525,15 +525,14 @@
 
         .hero {
             position: relative;
-            min-height: 100vh;
             overflow: hidden;
             background: transparent;
         }
 
         .hero-stage {
             position: relative;
-            height: 100vh;
-            min-height: 680px;
+            min-height: 75vh;
+            padding: calc(var(--header-height) + 40px) 0 80px;
             display: grid;
             place-items: center;
             overflow: hidden;
@@ -862,12 +861,10 @@
 
         .services-pin {
             position: relative;
-            min-height: 100vh;
-            padding: 0;
+            padding: clamp(80px, 10vw, 120px) 0;
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            gap: clamp(28px, 3vw, 48px);
+            gap: clamp(40px, 5vw, 64px);
             background:
                 linear-gradient(180deg, rgba(25, 102, 255, 0.04), transparent 36%),
                 #0A0A0A;
@@ -896,6 +893,7 @@
 
         .services-header {
             text-align: center;
+            padding: 0 18px;
         }
 
         .services-header .eyebrow {
@@ -914,33 +912,24 @@
         }
 
         .services-cue {
-            margin: 14px auto 0;
-            color: rgba(255, 255, 255, 0.46);
-            font-size: 0.74rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.32em;
+            display: none;
         }
 
         .services-track {
-            display: flex;
-            align-items: stretch;
-            gap: 20px;
-            padding-left: max(18px, calc((100vw - var(--container)) / 2));
-            padding-right: max(18px, calc((100vw - var(--container)) / 2));
-            will-change: transform;
-            flex: 1;
-            min-height: 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: clamp(20px, 3vw, 32px);
+            max-width: var(--container);
+            margin: 0 auto;
+            padding: 0 18px;
+            width: 100%;
         }
 
         .services-card {
-            flex: 0 0 auto;
-            width: min(520px, 76vw);
-            min-height: min(58vh, 480px);
-            padding: clamp(26px, 3vw, 42px);
             display: flex;
             flex-direction: column;
             gap: 22px;
+            padding: clamp(26px, 3vw, 42px);
             background-color: rgba(10, 10, 10, 0.78);
         }
 
@@ -950,60 +939,12 @@
         }
 
         .services-progress {
-            margin: 0 max(18px, calc((100vw - var(--container)) / 2));
-            height: 1px;
-            background: rgba(255, 255, 255, 0.1);
-            overflow: hidden;
-        }
-
-        .services-progress span {
-            display: block;
-            height: 100%;
-            width: calc(var(--svc-p, 0) * 100%);
-            background: linear-gradient(90deg, var(--blue-hot), var(--red));
-            box-shadow: 0 0 16px rgba(25, 102, 255, 0.6);
-        }
-
-        @media (max-width: 1100px) {
-            .services-pin {
-                min-height: 0;
-                padding: clamp(64px, 9vw, 110px) 0 56px;
-                overflow: visible;
-            }
-
-            .services-track {
-                overflow-x: auto;
-                overflow-y: hidden;
-                scroll-snap-type: x mandatory;
-                overscroll-behavior-x: contain;
-                -webkit-overflow-scrolling: touch;
-                scrollbar-width: none;
-                padding-bottom: 18px;
-                transform: none !important;
-            }
-
-            .services-track::-webkit-scrollbar {
-                display: none;
-            }
-
-            .services-card {
-                scroll-snap-align: start;
-                width: min(82vw, 420px);
-                min-height: 420px;
-            }
-
-            .services-progress {
-                display: none;
-            }
+            display: none;
         }
 
         @media (max-width: 760px) {
             .services-pin {
                 padding-top: calc(var(--header-height) + 12px);
-            }
-            .services-card {
-                width: min(86vw, 360px);
-                min-height: 380px;
             }
             .services-title {
                 font-size: clamp(1.4rem, 8vw, 2.4rem);
@@ -2218,62 +2159,7 @@
 
                 initGlobe3D(gsap, ScrollTrigger);
 
-                // Scroll horizontal "magnético" da seção de serviços (desktop)
-                // Em telas <=1100px o CSS fallback usa overflow-x nativo (swipe).
-                const servicesPin = document.getElementById("servicesPin");
-                const servicesTrack = document.getElementById("servicesTrack");
-                const servicesProgressBar = document.getElementById("servicesProgressBar")?.parentElement;
-                if (servicesPin && servicesTrack) {
-                    const mm = gsap.matchMedia();
-                    mm.add("(min-width: 1101px) and (prefers-reduced-motion: no-preference)", () => {
-                        // Distância correta = posição real do final do último card (incluindo
-                        // padding-right do track) menos a largura da viewport. Garante que a
-                        // borda direita do último card alinhe com a borda direita da tela.
-                        const distance = () => {
-                            const last = servicesTrack.lastElementChild;
-                            if (!last) return 0;
-                            const trackStyle = getComputedStyle(servicesTrack);
-                            const padRight = parseFloat(trackStyle.paddingRight) || 0;
-                            const trackEnd = last.offsetLeft + last.offsetWidth + padRight;
-                            return Math.max(trackEnd - window.innerWidth, 0);
-                        };
-
-                        const tween = gsap.to(servicesTrack, {
-                            x: () => -distance(),
-                            ease: "none",
-                            scrollTrigger: {
-                                trigger: servicesPin,
-                                pin: true,
-                                pinSpacing: true,
-                                scrub: 0.8,
-                                start: "top top",
-                                end: () => `+=${distance()}`,
-                                anticipatePin: 1,
-                                invalidateOnRefresh: true,
-                                onUpdate: (self) => {
-                                    if (servicesProgressBar) {
-                                        servicesProgressBar.style.setProperty("--svc-p", self.progress.toFixed(4));
-                                    }
-                                }
-                            }
-                        });
-
-                        // Recalcula quando todas as fontes/imagens carregam (afeta scrollWidth).
-                        const refresh = () => ScrollTrigger.refresh();
-                        if (document.fonts?.ready) document.fonts.ready.then(refresh);
-                        window.addEventListener("load", refresh, { once: true });
-
-                        return () => {
-                            tween.scrollTrigger?.kill();
-                            tween.kill();
-                            gsap.set(servicesTrack, { clearProps: "transform" });
-                            if (servicesProgressBar) servicesProgressBar.style.removeProperty("--svc-p");
-                            window.removeEventListener("load", refresh);
-                        };
-                    });
-                }
-
-
+                // (Scroll horizontal da seção de serviços removido - layout agora é grid vertical)
                 const quoteForm = document.getElementById("quoteForm");
                 const status = document.getElementById("formStatus");
                 quoteForm?.addEventListener("submit", (event) => {
