@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador de Carga | Stadler Logística</title>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --bg: #0A0A0A;
+            --panel: rgba(255, 255, 255, 0.055);
+            --panel-strong: rgba(255, 255, 255, 0.095);
+            --line: rgba(255, 255, 255, 0.12);
+            --line-strong: rgba(255, 255, 255, 0.22);
+            --text: #f6f8fb;
+            --muted: rgba(246, 248, 251, 0.68);
+            --quiet: rgba(246, 248, 251, 0.44);
+            --blue: #012772;
+            --blue-hot: #1966ff;
+            --red: #e1121a;
+            --red-deep: #9f1118;
+            --radius: 8px;
+            --header-height: 82px;
+            --container: min(1180px, calc(100vw - 36px));
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Geist", Arial, sans-serif;
+        }
+
+        body {
+            background: 
+                linear-gradient(180deg, rgba(1, 39, 114, 0.8), rgba(10, 10, 10, 1)),
+                #0A0A0A;
+            color: var(--text);
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header Styles */
+        .header {
+            height: var(--header-height);
+            background: rgba(10, 10, 10, 0.72);
+            backdrop-filter: blur(22px);
+            border-bottom: 1px solid var(--line);
+            display: flex;
+            align-items: center;
+            z-index: 100;
+        }
+
+        .header-row {
+            width: var(--container);
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .brand-full {
+            width: 180px;
+            height: auto;
+        }
+
+        .nav {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+        }
+
+        .nav a {
+            color: var(--text);
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            opacity: 0.8;
+            transition: opacity 0.2s;
+        }
+
+        .nav a:hover {
+            opacity: 1;
+        }
+
+        .cta {
+            background: linear-gradient(90deg, var(--red), var(--blue));
+            padding: 10px 20px;
+            border-radius: 4px;
+            font-weight: 600;
+            opacity: 1 !important;
+        }
+
+        /* App Wrapper */
+        .app-wrapper {
+            display: flex;
+            flex: 1;
+            min-height: 0;
+        }
+
+        .sidebar {
+            width: 420px;
+            background: var(--panel);
+            backdrop-filter: blur(12px);
+            border-right: 1px solid var(--line);
+            display: flex;
+            flex-direction: column;
+            z-index: 10;
+        }
+
+        .sidebar-brand {
+            padding: 24px;
+            border-bottom: 1px solid var(--line);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .sidebar-brand h1 {
+            font-size: 18px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--blue-hot);
+        }
+
+        .unit-switch {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(0,0,0,0.3);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+        }
+
+        .u-lbl.active { color: var(--blue-hot); font-weight: 700; }
+        .u-lbl { color: var(--quiet); transition: 0.2s; }
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 34px;
+            height: 18px;
+        }
+        .switch input { opacity: 0; width: 0; height: 0; }
+        .slider {
+            position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0;
+            background-color: var(--line); transition: .4s; border-radius: 20px;
+        }
+        .slider:before {
+            position: absolute; content: ""; height: 12px; width: 12px; left: 3px; bottom: 3px;
+            background-color: white; transition: .4s; border-radius: 50%;
+        }
+        input:checked + .slider { background-color: var(--blue-hot); }
+        input:checked + .slider:before { transform: translateX(16px); }
+
+        .scroll-area {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .scroll-area::-webkit-scrollbar { width: 4px; }
+        .scroll-area::-webkit-scrollbar-thumb { background: var(--line-strong); border-radius: 10px; }
+
+        .card {
+            background: var(--panel-strong);
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            overflow: hidden;
+        }
+
+        .card-header {
+            background: rgba(0,0,0,0.2);
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--line);
+            font-size: 14px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card-body { padding: 16px; }
+
+        .vehicle-selector {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .vehicle-option {
+            flex: 1;
+            background: rgba(0,0,0,0.2);
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .vehicle-option:hover { border-color: var(--blue-hot); background: rgba(25, 102, 255, 0.05); }
+        .vehicle-option.active { border-color: var(--blue-hot); background: rgba(25, 102, 255, 0.15); }
+
+        .vehicle-option img {
+            height: 48px;
+            filter: drop-shadow(0 4px 12px rgba(0,0,0,0.5));
+            -webkit-mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 35%, transparent 85%);
+        }
+
+        .vehicle-option span { font-size: 12px; font-weight: 500; }
+
+        .form-group { margin-bottom: 12px; }
+        .form-group label { display: block; font-size: 11px; color: var(--muted); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
+
+        .input-modern {
+            width: 100%;
+            height: 40px;
+            padding: 0 12px;
+            background: rgba(0,0,0,0.3);
+            border: 1px solid var(--line);
+            border-radius: 4px;
+            color: var(--text);
+            font-size: 13px;
+            outline: none;
+            transition: 0.2s;
+        }
+        .input-modern:focus { border-color: var(--blue-hot); box-shadow: 0 0 0 2px rgba(25, 102, 255, 0.2); }
+
+        select.input-modern { appearance: none; background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e"); background-repeat: no-repeat; background-position: right 12px center; background-size: 14px; }
+
+        .grid-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+        .cargo-item {
+            background: var(--panel);
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            padding: 12px;
+            margin-bottom: 12px;
+        }
+
+        .cargo-header { display: flex; gap: 8px; margin-bottom: 12px; align-items: center; }
+        .cargo-name { flex: 1; }
+        .cargo-color { width: 32px; height: 32px; border-radius: 4px; cursor: pointer; background: none; border: 1px solid var(--line); }
+
+        .cargo-weight { display: grid; grid-template-columns: 2fr 1fr; gap: 12px; margin-top: 4px; align-items: end; }
+
+        .btn {
+            height: 44px; display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 0 20px; border-radius: 4px; font-weight: 600; border: none; cursor: pointer; transition: 0.2s; font-size: 13px;
+        }
+        .btn-primary { background: var(--blue-hot); color: white; box-shadow: 0 4px 12px rgba(25, 102, 255, 0.3); }
+        .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 6px 16px rgba(25, 102, 255, 0.4); }
+        .btn-secondary { background: rgba(255,255,255,0.05); color: white; border: 1px solid var(--line); }
+        .btn-secondary:hover { background: rgba(255,255,255,0.1); }
+        .btn-icon { background: rgba(225, 18, 26, 0.1); color: var(--red); width: 32px; height: 32px; border-radius: 4px; display: flex; align-items: center; justify-content: center; }
+
+        .sidebar-footer { padding: 20px; border-top: 1px solid var(--line); }
+
+        .viewport { flex: 1; position: relative; display: flex; flex-direction: column; background: #000; }
+
+        .stats-bar {
+            position: absolute; top: 20px; left: 20px; right: 20px; z-index: 5; display: flex; gap: 16px; pointer-events: none;
+        }
+
+        .stat-box {
+            background: rgba(10, 10, 10, 0.8); backdrop-filter: blur(12px); border: 1px solid var(--line); padding: 14px 20px; border-radius: 8px; display: flex; align-items: center; gap: 16px; pointer-events: auto;
+        }
+
+        .stat-box i { font-size: 20px; color: var(--blue-hot); }
+        .stat-title { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; }
+        .stat-title + strong { font-size: 18px; color: var(--text); display: block; margin-top: 2px; }
+
+        #canvas-container { flex: 1; width: 100%; height: 100%; background: radial-gradient(circle at center, #01277233 0%, #000 100%); }
+
+        #empty-state { text-align: center; color: var(--quiet); position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); }
+        .pulse-ring { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 80px; height: 80px; border-radius: 50%; border: 1px solid var(--blue-hot); animation: pulse 2s infinite; }
+
+        #capacity-warning {
+            display: none; position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); background: var(--red); padding: 12px 24px; border-radius: 4px; color: white; align-items: center; gap: 12px; box-shadow: 0 8px 24px rgba(225, 18, 26, 0.4); font-weight: 600; z-index: 20;
+        }
+
+        #loading-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.8); backdrop-filter: blur(8px); display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 1000; transition: 0.3s; }
+        #loading-overlay.hidden { opacity: 0; pointer-events: none; }
+        .spinner { width: 40px; height: 40px; border: 3px solid rgba(25, 102, 255, 0.2); border-top-color: var(--blue-hot); border-radius: 50%; animation: spin 1s linear infinite; margin-bottom: 16px; }
+
+        @media (max-width: 1024px) { .sidebar { width: 340px; } .nav { display: none; } }
+        @media (max-width: 768px) { .app-wrapper { flex-direction: column; overflow-y: auto; } .sidebar { width: 100%; height: auto; border-right: none; border-bottom: 1px solid var(--line); } .viewport { height: 500px; flex: none; } .stats-bar { flex-wrap: wrap; } .stat-box { flex: 1; min-width: 140px; } }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <div class="header-row">
+            <a href="index_Supremo.html" class="brand">
+                <img class="brand-full" src="assets/stadler-logo-official-white.png" alt="Stadler Logística">
+            </a>
+            <nav class="nav">
+                <a href="index_Supremo.html#sobre">Sobre a Empresa</a>
+                <a href="index_Supremo.html#servicos">Serviços</a>
+                <a href="index_Supremo.html#seguranca">Segurança</a>
+                <a href="calculadora_Supremo.html" style="color: var(--blue-hot); opacity: 1;">Simulador</a>
+                <a href="index_Supremo.html#contato">Unidades</a>
+                <a class="cta" href="index_Supremo.html#contato">SOLICITAR ORÇAMENTO</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="app-wrapper">
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <h1><i class="fa-solid fa-cubes"></i> Simulador de Carga</h1>
+                <div class="unit-switch">
+                    <span class="u-lbl active" id="lbl-cm">cm</span>
+                    <label class="switch">
+                        <input type="checkbox" id="unitToggle">
+                        <span class="slider"></span>
+                    </label>
+                    <span class="u-lbl" id="lbl-mm">mm</span>
+                </div>
+            </div>
+
+            <div class="scroll-area">
+                <section class="card">
+                    <div class="card-header">
+                        <i class="fa-solid fa-truck-fast"></i> Veículo
+                    </div>
+                    <div class="card-body">
+                        <div class="vehicle-selector">
+                            <div class="vehicle-option active" data-type="container">
+                                <img src="https://packer.searates.com/images/main-container.png" alt="Container">
+                                <span>Container</span>
+                            </div>
+                            <div class="vehicle-option" data-type="truck">
+                                <img src="https://packer.searates.com/images/main-truck.png" alt="Truck">
+                                <span>Caminhão</span>
+                            </div>
+                        </div>
+
+                        <div id="containerPresetsWrapper">
+                            <div class="form-group">
+                                <label>Tipo de Container</label>
+                                <select id="containerSelect" class="input-modern">
+                                    <option value="20ft">20' Standard</option>
+                                    <option value="40ft">40' Standard</option>
+                                    <option value="40hc">40' High Cube</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="grid-2col" id="customContainerDim">
+                            <div class="form-group">
+                                <label>Compr. (<span class="unit-text">cm</span>)</label>
+                                <input type="number" id="contL" value="589" class="input-modern vehicle-dim" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label>Largura (<span class="unit-text">cm</span>)</label>
+                                <input type="number" id="contW" value="235" class="input-modern vehicle-dim" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label>Altura (<span class="unit-text">cm</span>)</label>
+                                <input type="number" id="contH" value="239" class="input-modern vehicle-dim" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label>Cap. Peso (kg)</label>
+                                <input type="number" id="contMaxW" value="24000" class="input-modern vehicle-dim" readonly>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="card">
+                    <div class="card-header">
+                        <i class="fa-solid fa-box-open"></i> Suas Cargas
+                    </div>
+                    <div class="card-body">
+                        <div id="cargoList"></div>
+                        <button id="addCargoBtn" class="btn btn-secondary w-100" style="border-style: dashed;">
+                            <i class="fa-solid fa-plus"></i> Nova Carga
+                        </button>
+                    </div>
+                </section>
+            </div>
+            
+            <div class="sidebar-footer">
+                <button id="calculateBtn" class="btn btn-primary w-100">
+                    <i class="fa-solid fa-play"></i> CALCULAR ESTUFAGEM
+                </button>
+            </div>
+        </aside>
+
+        <main class="viewport">
+            <div class="stats-bar">
+                <div class="stat-box">
+                    <i class="fa-solid fa-boxes-packing"></i>
+                    <div>
+                        <span class="stat-title">Alocadas</span>
+                        <strong id="stat-count">0 / 0</strong>
+                    </div>
+                </div>
+                <div class="stat-box">
+                    <i class="fa-solid fa-ruler-combined"></i>
+                    <div>
+                        <span class="stat-title">Ocupação (Vol)</span>
+                        <strong id="stat-vol">0.00%</strong>
+                    </div>
+                </div>
+                <div class="stat-box">
+                    <i class="fa-solid fa-weight-hanging"></i>
+                    <div>
+                        <span class="stat-title">Ocupação (Peso)</span>
+                        <strong id="stat-weight">0.00%</strong>
+                    </div>
+                </div>
+            </div>
+
+            <div id="capacity-warning">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+                <span id="warning-text">Aviso</span>
+            </div>
+
+            <div id="canvas-container">
+                <div id="empty-state">
+                    <div class="pulse-ring"></div>
+                    <i class="fa-solid fa-cube fa-3x"></i>
+                    <h3>Visualizador 3D</h3>
+                    <p>Adicione cargas e calcule para ver.</p>
+                </div>
+            </div>
+            
+            <div id="loading-overlay" class="hidden">
+                <div class="spinner"></div>
+                <p style="font-weight: 500;">Otimizando Carga...</p>
+            </div>
+        </main>
+    </div>
+
+    <template id="cargo-template">
+        <div class="cargo-item">
+            <div class="cargo-header">
+                <input type="text" class="cargo-name input-modern" placeholder="Ex: Palete A">
+                <input type="color" class="cargo-color" value="#1966ff">
+                <button class="btn-icon btn-remove" title="Remover"><i class="fa-solid fa-trash"></i></button>
+            </div>
+            <div class="cargo-dims grid-2col">
+                <div class="form-group">
+                    <label>Compr. (<span class="unit-text">cm</span>)</label>
+                    <input type="number" class="cargo-l input-modern" min="1" value="100">
+                </div>
+                <div class="form-group">
+                    <label>Largura (<span class="unit-text">cm</span>)</label>
+                    <input type="number" class="cargo-w input-modern" min="1" value="100">
+                </div>
+                <div class="form-group">
+                    <label>Altura (<span class="unit-text">cm</span>)</label>
+                    <input type="number" class="cargo-h input-modern" min="1" value="100">
+                </div>
+                <div class="form-group">
+                    <label>Qtd.</label>
+                    <input type="number" class="cargo-q input-modern" min="1" value="10">
+                </div>
+            </div>
+            <div class="cargo-weight">
+                <div class="form-group">
+                    <label>Peso Un. (kg)</label>
+                    <input type="number" class="cargo-weight-val input-modern" min="0" value="50">
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 8px; padding-bottom: 6px;">
+                    <label style="display: flex; align-items: center; gap: 6px; font-size: 11px; cursor: pointer;">
+                        <input type="checkbox" class="cargo-rotate" checked> Girar?
+                    </label>
+                    <label style="display: flex; align-items: center; gap: 6px; font-size: 11px; cursor: pointer;">
+                        <input type="checkbox" class="cargo-stackable" checked> Empilhável?
+                    </label>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    <script src="script_Supremo.js"></script>
+</body>
+</html>
